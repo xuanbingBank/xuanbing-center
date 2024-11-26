@@ -1,35 +1,40 @@
 <template>
-  <div class="container">
-    <h1>{{ message }}</h1>
-    <el-button type="primary" @click="handleClick">
-      Element Plus Button
-    </el-button>
+  <div class="app-container">
+    <el-container>
+      <el-header>
+        <nav>
+          <el-menu mode="horizontal" router>
+            <el-menu-item index="/">Home</el-menu-item>
+            <el-menu-item index="/about">About</el-menu-item>
+          </el-menu>
+        </nav>
+      </el-header>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App',
-  setup() {
-    const message = ref('Electron + Vue 3 + TypeScript + Element Plus')
-
-    const handleClick = () => {
-      console.log('Button clicked!')
-    }
-
-    return {
-      message,
-      handleClick
-    }
-  }
+  name: 'App'
 })
 </script>
 
 <style>
-.container {
+.app-container {
+  height: 100vh;
+}
+.el-container {
+  height: 100%;
+}
+.el-header {
+  padding: 0;
+}
+.el-main {
   padding: 20px;
-  text-align: center;
 }
 </style> 
