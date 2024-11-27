@@ -1,4 +1,4 @@
-import { Tools, InfoFilled } from '@element-plus/icons-vue'
+import { Tools } from '@element-plus/icons-vue'
 import type { MenuItem } from '@/types/menu'
 
 export const toolsRoute: MenuItem = {
@@ -11,19 +11,12 @@ export const toolsRoute: MenuItem = {
   },
   children: [
     {
-      path: '/tools-list',
-      name: 'tools-list',
+      path: '/tools/features',
+      name: 'toolFeatures',
+      component: () => import('@/views/tools/features.vue'),
       meta: {
-        title: '工具箱',
+        title: '小功能组',
         icon: Tools
-      }
-    },
-    {
-      path: '/about',
-      name: 'about',
-      meta: {
-        title: '关于',
-        icon: InfoFilled
       }
     }
   ]

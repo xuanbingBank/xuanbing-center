@@ -1,7 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { homeRoute } from './modules/home'
-import { systemRoute } from './modules/system'
+import { dataRoute } from './modules/data'
 import { toolsRoute } from './modules/tools'
+import { aboutRoute } from './modules/about'
 import { settingsRoute } from './modules/settings'
 import { generateRoutes } from './utils'
 import type { MenuItem } from '@/types/menu'
@@ -9,8 +10,9 @@ import type { MenuItem } from '@/types/menu'
 // 菜单路由配置
 export const menuRoutes: MenuItem[] = [
   homeRoute,
-  systemRoute,
+  dataRoute,
   toolsRoute,
+  aboutRoute,
   settingsRoute
 ]
 
