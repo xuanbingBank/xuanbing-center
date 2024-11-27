@@ -10,6 +10,13 @@ export default defineConfig({
       entry: 'electron/main.ts'
     })
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/styles/variables.scss";`
+      }
+    }
+  },
   base: './',
   resolve: {
     alias: {

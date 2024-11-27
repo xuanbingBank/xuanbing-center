@@ -1,0 +1,24 @@
+// 主题色
+$primary-color: #0080ff;
+$primary-hover: #26344575;
+$primary-active: #2634455b;
+
+// 文字颜色
+$text-primary: #303133;
+$text-regular: #606266;
+$text-secondary: #909399;
+$text-placeholder: #bfcbd9;
+
+// 边框颜色
+$border-color: #dcdfe6;
+
+// 背景颜色
+$bg-white: #ffffff;
+$bg-gray: #f5f7fa;
+
+// 菜单相关
+$menu-active-border: $primary-color;
+$menu-active-text: $primary-color;
+$menu-hover-bg: $primary-hover;
+$menu-active-bg: $primary-active;
+$menu-icon-color: $text-placeholder; 

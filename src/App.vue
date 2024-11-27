@@ -7,9 +7,7 @@
 
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside>
         <side-menu />
-      </el-aside>
 
       <!-- 主要内容区 -->
       <el-container>
@@ -32,7 +30,14 @@
 import SideMenu from './components/SideMenu.vue'
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .app-container {
   height: 100vh;
 }
@@ -41,35 +46,32 @@ import SideMenu from './components/SideMenu.vue'
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff;
-  border-bottom: 1px solid #dcdfe6;
+  background-color: $bg-white;
+  border-bottom: 1px solid $border-color;
   padding: 0 20px;
 }
 
 .header-logo {
   font-size: 20px;
   font-weight: bold;
-}
-
-.el-aside {
-  background-color: #fff;
+  color: $text-primary;
 }
 
 .el-main {
-  background-color: #f5f7fa;
+  background-color: $bg-gray;
   padding: 20px;
 }
 
 .el-footer {
-  background-color: #fff;
-  border-top: 1px solid #dcdfe6;
+  background-color: $bg-white;
+  border-top: 1px solid $border-color;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .footer-content {
-  color: #909399;
+  color: $text-secondary;
   font-size: 14px;
 }
 </style> 
