@@ -91,16 +91,16 @@ const handleModuleSelect = (index: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .side-menu-container {
   display: flex;
   height: 100%;
 }
 
 .primary-menu {
-  width: 24px;
-  background-color: $bg-white;
-  border-right: 1px solid $border-color;
+  width: @primary-menu-width;
+  background-color: @bg-white;
+  border-right: 1px solid @border-color;
 
   .primary-menu-list {
     border-right: none;
@@ -108,6 +108,7 @@ const handleModuleSelect = (index: string) => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: @bg-dark;
     
     .menu-top, .menu-bottom {
       display: flex;
@@ -119,33 +120,48 @@ const handleModuleSelect = (index: string) => {
       height: 30px;
       line-height: 30px;
       text-align: center;
+      color: @menu-dark-text;
+
+      &.is-active {
+        background-color: @menu-dark-active-bg;
+        color: @menu-dark-active-text;
+      }
+
+      &:hover {
+        background-color: @menu-dark-hover-bg;
+        color: @menu-dark-hover-text;
+      }
     }
   }
 }
 
 .secondary-menu {
-  width: 200px;
-  background-color: $bg-white;
-  border-right: 1px solid $border-color;
+  width: @secondary-menu-width;
+  background-color: @bg-white;
+  border-right: 1px solid @border-color;
 
   .secondary-menu-list {
     border-right: none;
   }
-}
 
-:deep(.el-menu-item) {
-  &.is-active {
-    background-color: $menu-active-bg;
-    border-left: 2px solid $menu-active-border;
-    color: $menu-active-text;
-  }
+  :deep(.el-menu-item) {
+    &.is-active {
+      background-color: @menu-active-bg;
+      border-left: 2px solid @menu-active-border;
+      color: @menu-active-text;
+    }
 
-  &:hover {
-    background-color: $menu-hover-bg;
+    &:hover {
+      background-color: @menu-hover-bg;
+    }
   }
 }
 
 :deep(.el-menu-item .el-icon) {
   margin-right: 0;
+}
+
+:deep(.el-menu) {
+  border-right: none;
 }
 </style> 
