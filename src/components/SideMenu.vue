@@ -7,15 +7,22 @@
         class="primary-menu-list"
         @select="handleModuleSelect"
       >
-        <el-menu-item index="home">
-          <el-icon><HomeFilled /></el-icon>
-        </el-menu-item>
-        <el-menu-item index="system">
-          <el-icon><Setting /></el-icon>
-        </el-menu-item>
-        <el-menu-item index="tools">
-          <el-icon><Tools /></el-icon>
-        </el-menu-item>
+        <div class="menu-top">
+          <el-menu-item index="home">
+            <el-icon><HomeFilled /></el-icon>
+          </el-menu-item>
+          <el-menu-item index="system">
+            <el-icon><Setting /></el-icon>
+          </el-menu-item>
+          <el-menu-item index="tools">
+            <el-icon><Tools /></el-icon>
+          </el-menu-item>
+        </div>
+        <div class="menu-bottom">
+          <el-menu-item index="settings">
+            <el-icon><Setting /></el-icon>
+          </el-menu-item>
+        </div>
       </el-menu>
     </div>
 
@@ -54,6 +61,13 @@
             <span>关于</span>
           </el-menu-item>
         </template>
+
+        <template v-if="activeModule === 'settings'">
+          <el-menu-item index="/settings">
+            <el-icon><Setting /></el-icon>
+            <span>设置</span>
+          </el-menu-item>
+        </template>
       </el-menu>
     </div>
   </div>
@@ -90,6 +104,15 @@ const handleModuleSelect = (index: string) => {
 
   .primary-menu-list {
     border-right: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .menu-top, .menu-bottom {
+      display: flex;
+      flex-direction: column;
+    }
     
     :deep(.el-menu-item) {
       padding: 0 !important;
