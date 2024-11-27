@@ -7,7 +7,7 @@
 
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="200px">
+      <el-aside>
         <side-menu />
       </el-aside>
 
