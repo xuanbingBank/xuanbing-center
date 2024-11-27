@@ -1,6 +1,6 @@
 <template>
-  <div class="feature2">
-    <h1>功能2</h1>
+  <div class="backup-settings">
+    <h2>备份设置</h2>
   </div>
 </template>
 

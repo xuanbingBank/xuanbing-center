@@ -1,6 +1,6 @@
 <template>
-  <div class="feature1">
-    <h1>功能1</h1>
+  <div class="game-screen">
+    <h2>游戏副屏</h2>
   </div>
 </template>
 

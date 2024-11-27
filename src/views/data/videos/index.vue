@@ -1,6 +1,6 @@
 <template>
-  <div class="dashboard">
-    <h1>数据看板</h1>
+  <div class="videos">
+    <h2>视频库</h2>
   </div>
 </template>
 
