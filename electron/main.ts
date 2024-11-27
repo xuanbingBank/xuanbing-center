@@ -19,7 +19,7 @@ function createWindow() {
   // 开发环境下加载本地服务
   if (!app.isPackaged) {
     win.loadURL('http://localhost:5173')
-    win.webContents.openDevTools()
+    win.webContents.openDevTools({ mode: 'detach' })
   } else {
     // 生产环境下加载打包后的index.html
     win.loadFile(path.join(process.env.DIST, 'index.html'))
