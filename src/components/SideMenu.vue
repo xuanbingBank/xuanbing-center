@@ -33,44 +33,27 @@
     </div>
 
     <!-- 二级菜单 -->
-    <div class="secondary-menu" v-show="activeModule !== ''">
+    <div 
+      class="secondary-menu"
+      :class="{ 'secondary-menu-collapsed': isCollapsed }"
+    >
+      <div class="secondary-menu-header" @click="toggleCollapse">
+        <el-icon class="collapse-icon" :class="{ 'is-collapsed': isCollapsed }">
+          <ArrowRight />
+        </el-icon>
+      </div>
       <el-menu
         :default-active="activeRoute"
         class="secondary-menu-list"
         router
+        :collapse="isCollapsed"
       >
-        <template v-for="route in currentModuleChildren" :key="route.path">
-          <el-sub-menu 
-            v-if="route.children?.length" 
-            :index="route.path"
-          >
-            <template #title>
-              <el-icon v-if="route.meta?.icon">
-                <component :is="route.meta.icon" />
-              </el-icon>
-              <span>{{ route.meta?.title }}</span>
-            </template>
-            <el-menu-item 
-              v-for="child in route.children"
-              :key="child.path"
-              :index="child.path"
-            >
-              <el-icon v-if="child.meta?.icon">
-                <component :is="child.meta.icon" />
-              </el-icon>
-              <span>{{ child.meta?.title }}</span>
-            </el-menu-item>
-          </el-sub-menu>
-          
-          <el-menu-item 
-            v-else 
-            :index="route.path"
-          >
-            <el-icon v-if="route.meta?.icon">
-              <component :is="route.meta.icon" />
-            </el-icon>
-            <span>{{ route.meta?.title }}</span>
-          </el-menu-item>
+        <template v-if="currentModuleRoute">
+          <recursive-menu-item 
+            v-for="route in currentModuleRoute.children"
+            :key="route.path"
+            :menu-item="route"
+          />
         </template>
       </el-menu>
     </div>
@@ -78,13 +61,83 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, defineComponent, PropType, h } from 'vue'
 import { useRoute } from 'vue-router'
 import { menuRoutes } from '@/router'
 import type { MenuItem } from '@/types/menu'
+import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
+import { ArrowRight } from '@element-plus/icons-vue'
+
+// 菜单折叠状态
+const isCollapsed = ref(false)
+
+// 切换折叠状态
+const toggleCollapse = () => {
+  isCollapsed.value = !isCollapsed.value
+}
+
+// 递归菜单项组件
+const RecursiveMenuItem = defineComponent({
+  name: 'RecursiveMenuItem',
+  props: {
+    menuItem: {
+      type: Object as PropType<MenuItem>,
+      required: true
+    }
+  },
+  setup(props) {
+    const renderIcon = () => {
+      const icon = props.menuItem.meta?.icon
+      if (icon) {
+        return h(ElIcon, null, {
+          default: () => h(icon)
+        })
+      }
+      return null
+    }
+
+    const renderTitle = () => {
+      const title = props.menuItem.meta?.title || ''
+      return [
+        renderIcon(),
+        h('span', title)
+      ]
+    }
+
+    return () => {
+      const children = props.menuItem.children
+      if (children?.length) {
+        return h(
+          ElSubMenu,
+          { 
+            index: props.menuItem.path,
+            popperClass: 'side-menu-popper'
+          },
+          {
+            title: () => renderTitle(),
+            default: () => children.map(child => 
+              h(RecursiveMenuItem, {
+                key: child.path,
+                menuItem: child
+              })
+            )
+          }
+        )
+      }
+
+      return h(
+        ElMenuItem,
+        { index: props.menuItem.path },
+        {
+          default: () => renderTitle()
+        }
+      )
+    }
+  }
+})
 
 const route = useRoute()
-const activeModule = ref('')
+const activeModule = ref('home')
 const activeRoute = ref('')
 
 // 顶部菜单（非底部菜单）
@@ -97,12 +150,10 @@ const bottomMenus = computed(() =>
   menuRoutes.filter(route => route.meta?.isBottom)
 )
 
-// 当前模块的子菜单
-const currentModuleChildren = computed(() => {
-  const currentModule = menuRoutes.find(
-    route => route.meta?.module === activeModule.value
-  )
-  return currentModule ? [currentModule] : []
+// 当前模块的路由配置
+const currentModuleRoute = computed(() => {
+  const current = menuRoutes.find(route => route.meta?.module === activeModule.value)
+  return current || menuRoutes[0] // 如果没有找到当前模块，返回第一个模块（首页）
 })
 
 // 处理模块选择
@@ -112,22 +163,53 @@ const handleModuleSelect = (index: string) => {
   const currentModule = menuRoutes.find(
     route => route.meta?.module === index
   )
-  if (currentModule) {
-    const firstRoute = currentModule.children?.[0] || currentModule
-    activeRoute.value = firstRoute.path
+  if (currentModule?.children?.length) {
+    const firstRoute = findFirstLeafRoute(currentModule.children)
+    if (firstRoute) {
+      activeRoute.value = firstRoute.path
+    }
   }
+}
+
+// 查找第一个叶子路由
+const findFirstLeafRoute = (routes: MenuItem[]): MenuItem | null => {
+  const firstRoute = routes[0]
+  if (!firstRoute) return null
+  if (firstRoute.children?.length) {
+    return findFirstLeafRoute(firstRoute.children)
+  }
+  return firstRoute
 }
 
 // 初始化激活的模块和路由
 const initActiveMenu = () => {
-  const currentRoute = menuRoutes.find(item => {
-    if (item.path === route.path) return true
-    return item.children?.some(child => child.path === route.path)
-  })
+  const currentRoute = findRouteByPath(menuRoutes, route.path)
   if (currentRoute?.meta?.module) {
     activeModule.value = currentRoute.meta.module
     activeRoute.value = route.path
+  } else {
+    // 如果没有找到当前路由，设置为首页
+    const homeModule = menuRoutes[0]
+    if (homeModule?.children?.length) {
+      const firstRoute = findFirstLeafRoute(homeModule.children)
+      if (firstRoute) {
+        activeModule.value = homeModule.meta?.module || 'home'
+        activeRoute.value = firstRoute.path
+      }
+    }
   }
+}
+
+// 根据路径查找路由配置
+const findRouteByPath = (routes: MenuItem[], path: string): MenuItem | null => {
+  for (const route of routes) {
+    if (route.path === path) return route
+    if (route.children?.length) {
+      const found = findRouteByPath(route.children, path)
+      if (found) return found
+    }
+  }
+  return null
 }
 
 // 初始化
@@ -182,6 +264,38 @@ initActiveMenu()
   width: @secondary-menu-width;
   background-color: @bg-white;
   border-right: 1px solid @border-color;
+  transition: width 0.3s;
+  position: relative;
+
+  &.secondary-menu-collapsed {
+    width: 64px;
+
+    .secondary-menu-header {
+      .collapse-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .secondary-menu-header {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+    cursor: pointer;
+    border-bottom: 1px solid @border-color;
+
+    .collapse-icon {
+      font-size: 16px;
+      color: @text-secondary;
+      transition: transform 0.3s;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
 
   .secondary-menu-list {
     border-right: none;
@@ -206,5 +320,9 @@ initActiveMenu()
 
 :deep(.el-menu) {
   border-right: none;
+}
+
+:deep(.el-menu--collapse) {
+  width: 64px;
 }
 </style> 
