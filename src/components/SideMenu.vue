@@ -8,19 +8,25 @@
         @select="handleModuleSelect"
       >
         <div class="menu-top">
-          <el-menu-item index="home">
-            <el-icon><HomeFilled /></el-icon>
-          </el-menu-item>
-          <el-menu-item index="system">
-            <el-icon><Setting /></el-icon>
-          </el-menu-item>
-          <el-menu-item index="tools">
-            <el-icon><Tools /></el-icon>
+          <el-menu-item 
+            v-for="route in topMenus" 
+            :key="route.name"
+            :index="route.meta?.module"
+          >
+            <el-icon v-if="route.meta?.icon">
+              <component :is="route.meta.icon" />
+            </el-icon>
           </el-menu-item>
         </div>
         <div class="menu-bottom">
-          <el-menu-item index="settings">
-            <el-icon><Setting /></el-icon>
+          <el-menu-item 
+            v-for="route in bottomMenus" 
+            :key="route.name"
+            :index="route.meta?.module"
+          >
+            <el-icon v-if="route.meta?.icon">
+              <component :is="route.meta.icon" />
+            </el-icon>
           </el-menu-item>
         </div>
       </el-menu>
@@ -33,39 +39,37 @@
         class="secondary-menu-list"
         router
       >
-        <template v-if="activeModule === 'home'">
-          <el-menu-item index="/dashboard">
-            <el-icon><DataBoard /></el-icon>
-            <span>数据看板</span>
-          </el-menu-item>
-        </template>
-
-        <template v-if="activeModule === 'system'">
-          <el-sub-menu index="1">
+        <template v-for="route in currentModuleChildren" :key="route.path">
+          <el-sub-menu 
+            v-if="route.children?.length" 
+            :index="route.path"
+          >
             <template #title>
-              <el-icon><Setting /></el-icon>
-              <span>功能</span>
+              <el-icon v-if="route.meta?.icon">
+                <component :is="route.meta.icon" />
+              </el-icon>
+              <span>{{ route.meta?.title }}</span>
             </template>
-            <el-menu-item index="/feature1">功能1</el-menu-item>
-            <el-menu-item index="/feature2">功能2</el-menu-item>
+            <el-menu-item 
+              v-for="child in route.children"
+              :key="child.path"
+              :index="child.path"
+            >
+              <el-icon v-if="child.meta?.icon">
+                <component :is="child.meta.icon" />
+              </el-icon>
+              <span>{{ child.meta?.title }}</span>
+            </el-menu-item>
           </el-sub-menu>
-        </template>
-
-        <template v-if="activeModule === 'tools'">
-          <el-menu-item index="/tools">
-            <el-icon><Tools /></el-icon>
-            <span>工具箱</span>
-          </el-menu-item>
-          <el-menu-item index="/about">
-            <el-icon><InfoFilled /></el-icon>
-            <span>关于</span>
-          </el-menu-item>
-        </template>
-
-        <template v-if="activeModule === 'settings'">
-          <el-menu-item index="/settings">
-            <el-icon><Setting /></el-icon>
-            <span>设置</span>
+          
+          <el-menu-item 
+            v-else 
+            :index="route.path"
+          >
+            <el-icon v-if="route.meta?.icon">
+              <component :is="route.meta.icon" />
+            </el-icon>
+            <span>{{ route.meta?.title }}</span>
           </el-menu-item>
         </template>
       </el-menu>
@@ -74,21 +78,60 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import {
-  HomeFilled,
-  Setting,
-  InfoFilled,
-  Tools,
-  DataBoard
-} from '@element-plus/icons-vue'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { menuRoutes } from '@/router'
+import type { MenuItem } from '@/types/menu'
 
-const activeModule = ref('home')
+const route = useRoute()
+const activeModule = ref('')
 const activeRoute = ref('')
 
+// 顶部菜单（非底部菜单）
+const topMenus = computed(() => 
+  menuRoutes.filter(route => !route.meta?.isBottom)
+)
+
+// 底部菜单
+const bottomMenus = computed(() => 
+  menuRoutes.filter(route => route.meta?.isBottom)
+)
+
+// 当前模块的子菜单
+const currentModuleChildren = computed(() => {
+  const currentModule = menuRoutes.find(
+    route => route.meta?.module === activeModule.value
+  )
+  return currentModule ? [currentModule] : []
+})
+
+// 处理模块选择
 const handleModuleSelect = (index: string) => {
   activeModule.value = index
+  // 找到当前模块的第一个可用路由
+  const currentModule = menuRoutes.find(
+    route => route.meta?.module === index
+  )
+  if (currentModule) {
+    const firstRoute = currentModule.children?.[0] || currentModule
+    activeRoute.value = firstRoute.path
+  }
 }
+
+// 初始化激活的模块和路由
+const initActiveMenu = () => {
+  const currentRoute = menuRoutes.find(item => {
+    if (item.path === route.path) return true
+    return item.children?.some(child => child.path === route.path)
+  })
+  if (currentRoute?.meta?.module) {
+    activeModule.value = currentRoute.meta.module
+    activeRoute.value = route.path
+  }
+}
+
+// 初始化
+initActiveMenu()
 </script>
 
 <style lang="less" scoped>
