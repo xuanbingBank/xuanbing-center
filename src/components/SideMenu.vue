@@ -81,57 +81,56 @@ const isCollapse = ref(false)
 const activeModule = ref('home')
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/styles/variables.scss';
+
 .menu-container {
   display: flex;
   height: 100%;
-}
 
-.primary-menu {
-  width: 64px;
-  height: 100%;
-  border-right: 1px solid #dcdfe6;
-  background-color: #304156;
-}
+  .primary-menu {
+    height: 100%;
+    border-right: 1px solid $border-color;
+    background-color: $bg-white;
 
-.primary-menu-items {
-  border-right: none;
-  background-color: #304156;
-}
+    &-items {
+      border-right: none;
+      background-color: $bg-white;
+      padding: 0 !important;
 
-.primary-menu-items :deep(.el-menu-item) {
-  text-align: center;
-  background-color: #304156;
-  border-left: 3px solid transparent;
-}
+      :deep(.el-menu-item) {
+        text-align: center;
+        background-color: $bg-white;
+        border-left: 3px solid transparent;
+        padding: 0 !important;
+        margin: 0;
 
-.primary-menu-items :deep(.el-menu-item.is-active) {
-  background-color: #263445;
-  border-left: 3px solid #409EFF;
-}
+        &.is-active {
+          background-color: $menu-active-bg;
+          border-left: 3px solid $menu-active-border;
+          color: $menu-active-text;
 
-.primary-menu-items :deep(.el-menu-item:hover) {
-  background-color: #263445;
-}
+          .el-icon {
+            color: $menu-active-text;
+          }
+        }
 
-.primary-menu-items :deep(.el-menu-item .el-icon) {
-  color: #bfcbd9;
-}
+        &:hover {
+          background-color: $menu-hover-bg;
+        }
 
-.primary-menu-items :deep(.el-menu-item.is-active .el-icon) {
-  color: #409EFF;
-}
+        .el-icon {
+          margin: 0;
+          line-height: 60px;
+          color: $menu-icon-color;
+        }
+      }
+    }
+  }
 
-.secondary-menu {
-  flex: 1;
-}
-
-.side-menu {
-  height: 100%;
-  border-right: 1px solid #dcdfe6;
-}
-
-.side-menu:not(.el-menu--collapse) {
-  width: 200px;
+  .side-menu {
+    height: 100%;
+    border-right: 1px solid $border-color;
+  }
 }
 </style> 
