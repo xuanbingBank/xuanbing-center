@@ -1,40 +1,32 @@
 <template>
-  <div class="menu-container">
-    <!-- 一级菜单栏 -->
+  <div class="side-menu-container">
+    <!-- 一级菜单 -->
     <div class="primary-menu">
       <el-menu
-        default-active="1"
-        class="primary-menu-items"
-        :collapse="true"
+        :default-active="activeModule"
+        class="primary-menu-list"
+        @select="handleModuleSelect"
       >
-        <el-menu-item index="1" @click="activeModule = 'home'">
+        <el-menu-item index="home">
           <el-icon><HomeFilled /></el-icon>
-          <template #title>首页</template>
         </el-menu-item>
-        <el-menu-item index="2" @click="activeModule = 'system'">
+        <el-menu-item index="system">
           <el-icon><Setting /></el-icon>
-          <template #title>系统</template>
         </el-menu-item>
-        <el-menu-item index="3" @click="activeModule = 'tools'">
+        <el-menu-item index="tools">
           <el-icon><Tools /></el-icon>
-          <template #title>工具</template>
         </el-menu-item>
       </el-menu>
     </div>
 
-    <!-- 二级菜单栏 -->
-    <div class="secondary-menu">
+    <!-- 二级菜单 -->
+    <div class="secondary-menu" v-show="activeModule !== ''">
       <el-menu
-        default-active="/"
-        class="side-menu"
-        :router="true"
-        :collapse="isCollapse"
+        :default-active="activeRoute"
+        class="secondary-menu-list"
+        router
       >
         <template v-if="activeModule === 'home'">
-          <el-menu-item index="/">
-            <el-icon><HomeFilled /></el-icon>
-            <span>首页概览</span>
-          </el-menu-item>
           <el-menu-item index="/dashboard">
             <el-icon><DataBoard /></el-icon>
             <span>数据看板</span>
@@ -77,60 +69,60 @@ import {
   DataBoard
 } from '@element-plus/icons-vue'
 
-const isCollapse = ref(false)
 const activeModule = ref('home')
+const activeRoute = ref('')
+
+const handleModuleSelect = (index: string) => {
+  activeModule.value = index
+}
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/variables.scss';
-
-.menu-container {
+.side-menu-container {
   display: flex;
   height: 100%;
+}
 
-  .primary-menu {
-    height: 100%;
-    border-right: 1px solid $border-color;
-    background-color: $bg-white;
+.primary-menu {
+  width: 24px;
+  background-color: $bg-white;
+  border-right: 1px solid $border-color;
 
-    &-items {
-      border-right: none;
-      background-color: $bg-white;
+  .primary-menu-list {
+    border-right: none;
+    
+    :deep(.el-menu-item) {
       padding: 0 !important;
-
-      :deep(.el-menu-item) {
-        text-align: center;
-        background-color: $bg-white;
-        border-left: 3px solid transparent;
-        padding: 0 !important;
-        margin: 0;
-
-        &.is-active {
-          background-color: $menu-active-bg;
-          border-left: 3px solid $menu-active-border;
-          color: $menu-active-text;
-
-          .el-icon {
-            color: $menu-active-text;
-          }
-        }
-
-        &:hover {
-          background-color: $menu-hover-bg;
-        }
-
-        .el-icon {
-          margin: 0;
-          line-height: 60px;
-          color: $menu-icon-color;
-        }
-      }
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
     }
   }
+}
 
-  .side-menu {
-    height: 100%;
-    border-right: 1px solid $border-color;
+.secondary-menu {
+  width: 200px;
+  background-color: $bg-white;
+  border-right: 1px solid $border-color;
+
+  .secondary-menu-list {
+    border-right: none;
   }
+}
+
+:deep(.el-menu-item) {
+  &.is-active {
+    background-color: $menu-active-bg;
+    border-left: 2px solid $menu-active-border;
+    color: $menu-active-text;
+  }
+
+  &:hover {
+    background-color: $menu-hover-bg;
+  }
+}
+
+:deep(.el-menu-item .el-icon) {
+  margin-right: 0;
 }
 </style> 
