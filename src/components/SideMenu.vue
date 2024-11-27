@@ -47,6 +47,7 @@
         class="secondary-menu-list"
         router
         :collapse="isCollapsed"
+        @select="handleSelect"
       >
         <template v-if="currentModuleRoute">
           <recursive-menu-item 
@@ -62,7 +63,7 @@
 
 <script lang="ts" setup>
 import { ref, computed, defineComponent, PropType, h } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { menuRoutes } from '@/router'
 import type { MenuItem } from '@/types/menu'
 import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
@@ -137,6 +138,7 @@ const RecursiveMenuItem = defineComponent({
 })
 
 const route = useRoute()
+const router = useRouter()
 const activeModule = ref('home')
 const activeRoute = ref('')
 
@@ -156,6 +158,12 @@ const currentModuleRoute = computed(() => {
   return current || menuRoutes[0] // 如果没有找到当前模块，返回第一个模块（首页）
 })
 
+// 处理菜单选择
+const handleSelect = (index: string) => {
+  activeRoute.value = index
+  router.push(index)
+}
+
 // 处理模块选择
 const handleModuleSelect = (index: string) => {
   activeModule.value = index
@@ -167,6 +175,7 @@ const handleModuleSelect = (index: string) => {
     const firstRoute = findFirstLeafRoute(currentModule.children)
     if (firstRoute) {
       activeRoute.value = firstRoute.path
+      router.push(firstRoute.path)
     }
   }
 }
