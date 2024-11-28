@@ -1,18 +1,29 @@
 <template>
-  <el-container class="app-container">
+  <el-container class="app-container" :class="{ 'dark': isDark }">
     <!-- 顶栏 -->
     <el-header class="app-header">
       <div class="header-logo">XuanBing Center</div>
+      <div class="header-actions">
+        <el-button @click="handleToggleDark">
+          <el-icon>
+            <component :is="isDark ? Sunny : Moon" />
+          </el-icon>
+        </el-button>
+      </div>
     </el-header>
 
     <el-container>
       <!-- 侧边栏 -->
-        <side-menu />
+      <side-menu />
 
       <!-- 主要内容区 -->
       <el-container>
         <el-main>
-          <router-view></router-view>
+          <router-view v-slot="{ Component }">
+            <transition name="fade" mode="out-in">
+              <component :is="Component" />
+            </transition>
+          </router-view>
         </el-main>
         
         <!-- 底栏 -->
@@ -27,7 +38,17 @@
 </template>
 
 <script lang="ts" setup>
-import SideMenu from './components/SideMenu.vue'
+import SideMenu from './layouts/SideMenu.vue'
+import { useDark, useToggle } from '@vueuse/core'
+import { Moon, Sunny } from '@element-plus/icons-vue'
+
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
+
+// 处理暗色模式切换
+const handleToggleDark = (evt: MouseEvent) => {
+  toggleDark()
+}
 </script>
 
 <style lang="less" scoped>
@@ -58,6 +79,12 @@ import SideMenu from './components/SideMenu.vue'
   color: @text-primary;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .el-main {
   background-color: @bg-gray;
   padding: 20px;
@@ -75,5 +102,16 @@ import SideMenu from './components/SideMenu.vue'
 .footer-content {
   color: @text-secondary;
   font-size: 14px;
+}
+
+// 页面切换动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style> 
