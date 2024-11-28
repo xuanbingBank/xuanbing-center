@@ -132,9 +132,6 @@ dist
 # Electron build output
 dist-electron/
 
-# pnpm lock file
-pnpm-lock.yaml
-
 # cursor ignore
 .cursorignore
 .cursorrules
