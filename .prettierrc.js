@@ -18,5 +18,32 @@ module.exports = {
   htmlWhitespaceSensitivity: 'css',
   vueIndentScriptAndStyle: false,
   endOfLine: 'auto',
-  embeddedLanguageFormatting: 'auto'
-} 
+  embeddedLanguageFormatting: 'auto',
+  overrides: [
+    {
+      files: '*.md',
+      options: {
+        tabWidth: 2,
+        proseWrap: 'always'
+      }
+    },
+    {
+      files: '*.json',
+      options: {
+        tabWidth: 2
+      }
+    },
+    {
+      files: '*.less',
+      options: {
+        singleQuote: false
+      }
+    },
+    {
+      files: ['*.yml', '*.yaml'],
+      options: {
+        singleQuote: false
+      }
+    }
+  ]
+}
