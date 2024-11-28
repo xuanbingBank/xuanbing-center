@@ -10,6 +10,11 @@ export default defineConfig({
       entry: 'electron/main.ts'
     })
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
   css: {
     preprocessorOptions: {
       less: {
@@ -18,11 +23,6 @@ export default defineConfig({
     }
   },
   base: './',
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src')
-    }
-  },
   build: {
     outDir: 'dist',
     emptyOutDir: true
