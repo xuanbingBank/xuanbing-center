@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useCounterStore } from '../stores/counter'
+import { useCounterStore } from '../stores'
 
 export default defineComponent({
   name: 'About',
