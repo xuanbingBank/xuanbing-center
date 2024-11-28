@@ -1,0 +1,7 @@
+dist
+dist-electron
+node_modules
+.vscode
+.idea
+*.d.ts
+docs/.vitepress 
