@@ -1,7 +1,9 @@
 import type { RouteRecordRaw } from 'vue-router'
 import type { MenuItem } from '@/types/menu'
 
-// 生成路由配置
+/**
+ * @description 生成路由配置
+ */
 export function generateRoutes(menuRoutes: MenuItem[]): RouteRecordRaw[] {
   const routes: RouteRecordRaw[] = []
 
@@ -10,16 +12,16 @@ export function generateRoutes(menuRoutes: MenuItem[]): RouteRecordRaw[] {
       path: menuItem.path,
       name: menuItem.name,
       component: menuItem.component,
-      meta: menuItem.meta,
+      meta: menuItem.meta as any,
       children: []
     }
 
     if (menuItem.children?.length) {
       route.children = menuItem.children.map(child => ({
-        path: child.path.replace(menuItem.path + '/', ''), // 移除父路径前缀
+        path: child.path.replace(menuItem.path + '/', ''),
         name: child.name,
         component: child.component,
-        meta: child.meta,
+        meta: child.meta as any,
         children: []
       }))
     }
