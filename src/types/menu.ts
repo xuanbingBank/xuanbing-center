@@ -1,4 +1,5 @@
 import type { Component } from 'vue'
+import type { RouteRecordRaw } from 'vue-router'
 
 export interface MenuItem {
   path: string
@@ -11,4 +12,9 @@ export interface MenuItem {
     isBottom?: boolean
   }
   children?: MenuItem[]
+}
+
+// 确保 MenuItem 可以转换为 RouteRecordRaw
+export type MenuItemToRoute = Omit<RouteRecordRaw, 'children'> & {
+  children?: MenuItemToRoute[]
 } 
