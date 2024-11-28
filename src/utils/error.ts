@@ -104,27 +104,17 @@ export class ErrorHandler {
 }
 
 /**
- * @description 错误处理装饰器
+ * @description 包装异步函数，添加错误处理
  */
-export function catchError() {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
-    const originalMethod = descriptor.value
-
-    descriptor.value = async function (...args: any[]) {
-      try {
-        return await originalMethod.apply(this, args)
-      } catch (error) {
-        ErrorHandler.handle(error)
-        throw error
-      }
+export function withErrorHandler<T extends (...args: any[]) => Promise<any>>(fn: T): T {
+  return (async (...args: Parameters<T>) => {
+    try {
+      return await fn(...args)
+    } catch (error) {
+      ErrorHandler.handle(error)
+      throw error
     }
-
-    return descriptor
-  }
+  }) as T
 }
 
 /**
