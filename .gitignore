@@ -138,3 +138,6 @@ pnpm-lock.yaml
 # cursor ignore
 .cursorignore
 .cursorrules
+
+# vscode
+.vscode/
