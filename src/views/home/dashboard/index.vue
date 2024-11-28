@@ -44,12 +44,35 @@ import {
   useOnline,
   usePreferredLanguages
 } from '@vueuse/core'
+import { withErrorHandler } from '@/utils/error'
 
 const { width, height } = useWindowSize()
 const online = useOnline()
 const { level: batteryLevel } = useBattery()
 const preferredLanguages = usePreferredLanguages()
 const platform = process.platform
+
+class DashboardService {
+  /**
+   * @description 加载数据
+   */
+  loadData = withErrorHandler(async () => {
+    // 模拟可能出错的操作
+    throw new Error('加载数据失败')
+  })
+}
+
+const service = new DashboardService()
+
+// 在组件中使用
+const handleLoadData = async () => {
+  try {
+    await service.loadData()
+  } catch (error) {
+    // 错误已经被统一处理，这里可以做一些额外的处理
+    console.log('Additional error handling')
+  }
+}
 </script>
 
 <style lang="less" scoped>
