@@ -84,8 +84,8 @@ onMounted(() => {
 
   &__primary {
     width: @primary-menu-width;
-    background-color: @bg-white;
-    border-right: 1px solid @border-color;
+    background-color: @menu-dark-bg;
+    border-right: @border-width-base @border-style-base @border-color-base;
 
     &-list {
       border-right: none;
@@ -93,7 +93,7 @@ onMounted(() => {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background-color: @bg-dark;
+      background-color: @menu-dark-bg;
     }
 
     &-top,
@@ -105,9 +105,9 @@ onMounted(() => {
 
   &__secondary {
     width: @secondary-menu-width;
-    background-color: @bg-white;
-    border-right: 1px solid @border-color;
-    transition: width 0.3s;
+    background-color: @menu-bg;
+    border-right: @border-width-base @border-style-base @border-color-base;
+    transition: @animation-duration-base;
     position: relative;
 
     &--collapsed {
@@ -119,13 +119,13 @@ onMounted(() => {
     }
 
     &-header {
-      height: 30px;
+      height: @menu-item-height;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      padding: 0 8px;
+      padding: 0 @spacing-sm;
       cursor: pointer;
-      border-bottom: 1px solid @border-color;
+      border-bottom: @border-width-base @border-style-base @border-color-split;
     }
 
     &-list {
@@ -134,9 +134,9 @@ onMounted(() => {
   }
 
   &__collapse-icon {
-    font-size: 16px;
+    font-size: @font-size-base;
     color: @text-secondary;
-    transition: transform 0.3s;
+    transition: transform @animation-duration-base @animation-timing-function-base;
 
     &:hover {
       color: @primary-color;
@@ -150,13 +150,13 @@ onMounted(() => {
 
 :deep(.el-menu-item) {
   &.is-active {
-    background-color: @menu-active-bg;
-    border-left: 2px solid @menu-active-border;
-    color: @menu-active-text;
+    background-color: @menu-item-active-bg;
+    border-left: @border-width-base * 2 @border-style-base @primary-color;
+    color: @primary-color;
   }
 
   &:hover {
-    background-color: @menu-hover-bg;
+    background-color: @menu-item-hover-bg;
   }
 
   .el-icon {
@@ -175,19 +175,19 @@ onMounted(() => {
 // 一级菜单项样式
 :deep(.side-menu__primary-list .el-menu-item) {
   padding: 0 !important;
-  height: 30px;
-  line-height: 30px;
+  height: @menu-item-height;
+  line-height: @menu-item-height;
   text-align: center;
-  color: @menu-dark-text;
+  color: @menu-dark-item-text;
 
   &.is-active {
-    background-color: @menu-dark-active-bg;
-    color: @menu-dark-active-text;
+    background-color: @menu-dark-item-active-bg;
+    color: @menu-dark-item-active-text;
   }
 
   &:hover {
-    background-color: @menu-dark-hover-bg;
-    color: @menu-dark-hover-text;
+    background-color: @menu-dark-item-hover-bg;
+    color: @menu-dark-item-hover-text;
   }
 }
 </style>

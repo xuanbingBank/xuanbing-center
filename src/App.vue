@@ -65,14 +65,14 @@ const handleToggleDark = (evt: MouseEvent) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: @bg-white;
-  border-bottom: 1px solid @border-color;
-  padding: 0 20px;
+  background-color: @bg-base;
+  border-bottom: @border-width-base @border-style-base @border-color-base;
+  padding: 0 @spacing-lg;
   height: @header-height;
 }
 
 .header-logo {
-  font-size: 20px;
+  font-size: @font-size-xl;
   font-weight: bold;
   color: @text-primary;
 }
@@ -80,17 +80,17 @@ const handleToggleDark = (evt: MouseEvent) => {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: @spacing-sm;
 }
 
 .el-main {
-  background-color: @bg-gray;
-  padding: 20px;
+  background-color: @bg-light;
+  padding: @spacing-lg;
 }
 
 .el-footer {
-  background-color: @bg-white;
-  border-top: 1px solid @border-color;
+  background-color: @bg-base;
+  border-top: @border-width-base @border-style-base @border-color-base;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,13 +99,13 @@ const handleToggleDark = (evt: MouseEvent) => {
 
 .footer-content {
   color: @text-secondary;
-  font-size: 14px;
+  font-size: @font-size-base;
 }
 
 // 页面切换动画
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity @animation-duration-base @animation-timing-function-base;
 }
 
 .fade-enter-from,
