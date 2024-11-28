@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu-container">
+  <div class="side-menu-container" ref="menuContainerRef">
     <!-- 一级菜单 -->
     <div class="primary-menu">
       <el-menu
@@ -62,15 +62,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, defineComponent, PropType, h } from 'vue'
+import { computed, defineComponent, PropType, h } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useStorage, useLocalStorage } from '@vueuse/core'
 import { menuRoutes } from '@/router'
 import type { MenuItem } from '@/types/menu'
 import { ElSubMenu, ElMenuItem, ElIcon } from 'element-plus'
 import { ArrowRight } from '@element-plus/icons-vue'
 
-// 菜单折叠状态
-const isCollapsed = ref(false)
+// 持久化状态
+const isCollapsed = useLocalStorage('xuanbing-menu-collapsed', false)
+const activeModule = useStorage('xuanbing-active-module', 'home')
+const activeRoute = useStorage('xuanbing-active-route', '')
 
 // 切换折叠状态
 const toggleCollapse = () => {
@@ -139,35 +142,29 @@ const RecursiveMenuItem = defineComponent({
 
 const route = useRoute()
 const router = useRouter()
-const activeModule = ref('home')
-const activeRoute = ref('')
 
-// 顶部菜单（非底部菜单）
+// 计算属性
 const topMenus = computed(() => 
   menuRoutes.filter(route => !route.meta?.isBottom)
 )
 
-// 底部菜单
 const bottomMenus = computed(() => 
   menuRoutes.filter(route => route.meta?.isBottom)
 )
 
-// 当前模块的路由配置
 const currentModuleRoute = computed(() => {
   const current = menuRoutes.find(route => route.meta?.module === activeModule.value)
-  return current || menuRoutes[0] // 如果没有找到当前模块，返回第一个模块（首页）
+  return current || menuRoutes[0]
 })
 
-// 处理菜单选择
+// 路由处理函数
 const handleSelect = (index: string) => {
   activeRoute.value = index
   router.push(index)
 }
 
-// 处理模块选择
 const handleModuleSelect = (index: string) => {
   activeModule.value = index
-  // 找到当前模块的第一个可用路由
   const currentModule = menuRoutes.find(
     route => route.meta?.module === index
   )
@@ -180,7 +177,7 @@ const handleModuleSelect = (index: string) => {
   }
 }
 
-// 查找第一个叶子路由
+// 工具函数
 const findFirstLeafRoute = (routes: MenuItem[]): MenuItem | null => {
   const firstRoute = routes[0]
   if (!firstRoute) return null
@@ -190,26 +187,6 @@ const findFirstLeafRoute = (routes: MenuItem[]): MenuItem | null => {
   return firstRoute
 }
 
-// 初始化激活的模块和路由
-const initActiveMenu = () => {
-  const currentRoute = findRouteByPath(menuRoutes, route.path)
-  if (currentRoute?.meta?.module) {
-    activeModule.value = currentRoute.meta.module
-    activeRoute.value = route.path
-  } else {
-    // 如果没有找到当前路由，设置为首页
-    const homeModule = menuRoutes[0]
-    if (homeModule?.children?.length) {
-      const firstRoute = findFirstLeafRoute(homeModule.children)
-      if (firstRoute) {
-        activeModule.value = homeModule.meta?.module || 'home'
-        activeRoute.value = firstRoute.path
-      }
-    }
-  }
-}
-
-// 根据路径查找路由配置
 const findRouteByPath = (routes: MenuItem[], path: string): MenuItem | null => {
   for (const route of routes) {
     if (route.path === path) return route
@@ -222,6 +199,23 @@ const findRouteByPath = (routes: MenuItem[], path: string): MenuItem | null => {
 }
 
 // 初始化
+const initActiveMenu = () => {
+  const currentRoute = findRouteByPath(menuRoutes, route.path)
+  if (currentRoute?.meta?.module) {
+    activeModule.value = currentRoute.meta.module
+    activeRoute.value = route.path
+  } else {
+    const homeModule = menuRoutes[0]
+    if (homeModule?.children?.length) {
+      const firstRoute = findFirstLeafRoute(homeModule.children)
+      if (firstRoute) {
+        activeModule.value = homeModule.meta?.module || 'home'
+        activeRoute.value = firstRoute.path
+      }
+    }
+  }
+}
+
 initActiveMenu()
 </script>
 
