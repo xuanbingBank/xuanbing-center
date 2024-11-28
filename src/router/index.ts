@@ -5,6 +5,7 @@ import { toolsRoute } from './modules/tools'
 import { aboutRoute } from './modules/about'
 import { settingsRoute } from './modules/settings'
 import { generateRoutes } from './utils'
+import { setupRouterGuards } from './guards'
 import type { MenuItem } from '@/types/menu'
 
 // 菜单路由配置
@@ -24,5 +25,8 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+// 注册路由守卫
+setupRouterGuards(router)
 
 export default router 
