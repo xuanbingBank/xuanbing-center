@@ -32,10 +32,7 @@ const RecursiveMenuItem = defineComponent({
      */
     const renderTitle = () => {
       const title = props.menuItem.meta?.title || ''
-      return [
-        renderIcon(),
-        h('span', title)
-      ]
+      return [renderIcon(), h('span', title)]
     }
 
     return () => {
@@ -43,18 +40,19 @@ const RecursiveMenuItem = defineComponent({
       if (children?.length) {
         return h(
           ElSubMenu,
-          { 
+          {
             index: props.menuItem.path,
             popperClass: 'side-menu-popper'
           },
           {
             title: () => renderTitle(),
-            default: () => children.map(child => 
-              h(RecursiveMenuItem, {
-                key: child.path,
-                menuItem: child
-              })
-            )
+            default: () =>
+              children.map(child =>
+                h(RecursiveMenuItem, {
+                  key: child.path,
+                  menuItem: child
+                })
+              )
           }
         )
       }
@@ -70,4 +68,4 @@ const RecursiveMenuItem = defineComponent({
   }
 })
 
-export default RecursiveMenuItem 
+export default RecursiveMenuItem

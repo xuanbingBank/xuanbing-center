@@ -136,4 +136,4 @@ export function createDatabaseError(message: string, code?: string | number, dat
  */
 export function createFileError(message: string, code?: string | number, data?: any) {
   return new CustomError(message, ErrorType.FILE, code, data)
-} 
+}

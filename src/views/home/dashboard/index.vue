@@ -1,29 +1,29 @@
 <template>
   <div class="dashboard">
     <h2>数据看板</h2>
-    
+
     <el-card class="system-info">
       <template #header>
         <div class="card-header">
           <span>系统信息</span>
         </div>
       </template>
-      
+
       <div class="info-item">
         <span>系统平台：</span>
         <span>{{ platform }}</span>
       </div>
-      
+
       <div class="info-item">
         <span>窗口尺寸：</span>
         <span>{{ width }} x {{ height }}</span>
       </div>
-      
+
       <div class="info-item">
         <span>电池状态：</span>
         <span>{{ batteryLevel ? `${Math.round(batteryLevel * 100)}%` : '未知' }}</span>
       </div>
-      
+
       <div class="info-item">
         <span>网络状态：</span>
         <span>{{ online ? '在线' : '离线' }}</span>
@@ -38,12 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { 
-  useWindowSize, 
-  useBattery, 
-  useOnline,
-  usePreferredLanguages
-} from '@vueuse/core'
+import { useWindowSize, useBattery, useOnline, usePreferredLanguages } from '@vueuse/core'
 import { withErrorHandler } from '@/utils/error'
 
 const { width, height } = useWindowSize()
@@ -88,4 +83,4 @@ const handleLoadData = async () => {
     gap: 10px;
   }
 }
-</style> 
+</style>

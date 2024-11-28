@@ -45,4 +45,4 @@ export const settingsRoute: MenuItem = {
       }
     }
   ]
-} 
+}

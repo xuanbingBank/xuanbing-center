@@ -19,16 +19,12 @@ export function useMenu() {
   /**
    * @description 计算顶部菜单项
    */
-  const topMenus = computed(() => 
-    menuRoutes.filter(route => !route.meta?.isBottom)
-  )
+  const topMenus = computed(() => menuRoutes.filter(route => !route.meta?.isBottom))
 
   /**
    * @description 计算底部菜单项
    */
-  const bottomMenus = computed(() => 
-    menuRoutes.filter(route => route.meta?.isBottom)
-  )
+  const bottomMenus = computed(() => menuRoutes.filter(route => route.meta?.isBottom))
 
   /**
    * @description 计算当前模块路由
@@ -58,9 +54,7 @@ export function useMenu() {
    */
   const handleModuleSelect = (index: string) => {
     activeModule.value = index
-    const currentModule = menuRoutes.find(
-      route => route.meta?.module === index
-    )
+    const currentModule = menuRoutes.find(route => route.meta?.module === index)
     if (currentModule?.children?.length) {
       const firstRoute = findFirstLeafRoute(currentModule.children)
       if (firstRoute) {
@@ -131,4 +125,4 @@ export function useMenu() {
     handleModuleSelect,
     initActiveMenu
   }
-} 
+}

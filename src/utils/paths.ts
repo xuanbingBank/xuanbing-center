@@ -8,7 +8,7 @@ import { mkdirSync, existsSync } from 'fs'
 export const APP_PATHS = {
   // 应用数据根目录
   ROOT: join(app.getPath('userData'), 'XuanBingData'),
-  
+
   // 数据库文件目录
   DATABASE: {
     ROOT: join(app.getPath('userData'), 'XuanBingData', 'databases'),
@@ -20,13 +20,13 @@ export const APP_PATHS = {
 
   // 配置文件目录
   CONFIG: join(app.getPath('userData'), 'XuanBingData', 'config'),
-  
+
   // 缓存目录
   CACHE: join(app.getPath('userData'), 'XuanBingData', 'cache'),
-  
+
   // 日志目录
   LOGS: join(app.getPath('userData'), 'XuanBingData', 'logs'),
-  
+
   // 临时文件目录
   TEMP: join(app.getPath('userData'), 'XuanBingData', 'temp')
 } as const
@@ -46,4 +46,4 @@ export function initAppPaths() {
       })
     }
   })
-} 
+}

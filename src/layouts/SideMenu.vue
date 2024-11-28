@@ -8,22 +8,14 @@
         @select="handleModuleSelect"
       >
         <div class="side-menu__primary-top">
-          <el-menu-item 
-            v-for="route in topMenus" 
-            :key="route.name"
-            :index="route.meta?.module"
-          >
+          <el-menu-item v-for="route in topMenus" :key="route.name" :index="route.meta?.module">
             <el-icon v-if="route.meta?.icon">
               <component :is="route.meta.icon" />
             </el-icon>
           </el-menu-item>
         </div>
         <div class="side-menu__primary-bottom">
-          <el-menu-item 
-            v-for="route in bottomMenus" 
-            :key="route.name"
-            :index="route.meta?.module"
-          >
+          <el-menu-item v-for="route in bottomMenus" :key="route.name" :index="route.meta?.module">
             <el-icon v-if="route.meta?.icon">
               <component :is="route.meta.icon" />
             </el-icon>
@@ -33,12 +25,12 @@
     </div>
 
     <!-- 二级菜单 -->
-    <div 
-      class="side-menu__secondary"
-      :class="{ 'side-menu__secondary--collapsed': isCollapsed }"
-    >
+    <div class="side-menu__secondary" :class="{ 'side-menu__secondary--collapsed': isCollapsed }">
       <div class="side-menu__secondary-header" @click="toggleCollapse">
-        <el-icon class="side-menu__collapse-icon" :class="{ 'side-menu__collapse-icon--collapsed': isCollapsed }">
+        <el-icon
+          class="side-menu__collapse-icon"
+          :class="{ 'side-menu__collapse-icon--collapsed': isCollapsed }"
+        >
           <ArrowRight />
         </el-icon>
       </div>
@@ -50,7 +42,7 @@
         @select="handleSelect"
       >
         <template v-if="currentModuleRoute">
-          <recursive-menu-item 
+          <recursive-menu-item
             v-for="route in currentModuleRoute.children"
             :key="route.path"
             :menu-item="route"
@@ -198,4 +190,4 @@ onMounted(() => {
     color: @menu-dark-hover-text;
   }
 }
-</style> 
+</style>

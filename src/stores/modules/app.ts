@@ -13,7 +13,7 @@ interface RouteHistory {
 export const useAppStore = defineStore('app', () => {
   /** 加载状态 */
   const loading = ref(false)
-  
+
   /** 路由历史 */
   const routeHistory = ref<RouteHistory[]>([])
 
@@ -41,4 +41,4 @@ export const useAppStore = defineStore('app', () => {
     setLoading,
     addRouteHistory
   }
-}) 
+})

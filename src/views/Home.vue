@@ -7,9 +7,7 @@
       <el-button type="primary" @click="counter.increment">+</el-button>
       <el-button type="primary" @click="counter.decrement">-</el-button>
     </div>
-    <el-button type="success" @click="$router.push('/about')">
-      Go to About
-    </el-button>
+    <el-button type="success" @click="$router.push('/about')"> Go to About </el-button>
   </div>
 </template>
 
@@ -39,4 +37,4 @@ export default defineComponent({
 .counter {
   margin: 20px 0;
 }
-</style> 
+</style>

@@ -31,4 +31,4 @@ export function generateRoutes(menuRoutes: MenuItem[]): RouteRecordRaw[] {
 
   menuRoutes.forEach(route => addRoute(route))
   return routes
-} 
+}

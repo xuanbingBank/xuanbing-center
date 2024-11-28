@@ -1,5 +1,5 @@
 <template>
-  <el-container class="app-container" :class="{ 'dark': isDark }">
+  <el-container class="app-container" :class="{ dark: isDark }">
     <!-- 顶栏 -->
     <el-header class="app-header">
       <div class="header-logo">XuanBing Center</div>
@@ -25,12 +25,10 @@
             </transition>
           </router-view>
         </el-main>
-        
+
         <!-- 底栏 -->
         <el-footer height="50px">
-          <div class="footer-content">
-            © 2024 XuanBing Center. All rights reserved.
-          </div>
+          <div class="footer-content">© 2024 XuanBing Center. All rights reserved.</div>
         </el-footer>
       </el-container>
     </el-container>
@@ -54,7 +52,7 @@ const handleToggleDark = (evt: MouseEvent) => {
 <style lang="less" scoped>
 @import '@/styles/variables.less';
 
-*{
+* {
   padding: 0;
   margin: 0;
 }
@@ -114,4 +112,4 @@ const handleToggleDark = (evt: MouseEvent) => {
 .fade-leave-to {
   opacity: 0;
 }
-</style> 
+</style>

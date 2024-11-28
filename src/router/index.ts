@@ -9,13 +9,7 @@ import { setupRouterGuards } from './guards'
 import type { MenuItem } from '@/types/menu'
 
 // 菜单路由配置
-export const menuRoutes: MenuItem[] = [
-  homeRoute,
-  dataRoute,
-  toolsRoute,
-  aboutRoute,
-  settingsRoute
-]
+export const menuRoutes: MenuItem[] = [homeRoute, dataRoute, toolsRoute, aboutRoute, settingsRoute]
 
 // 生成路由配置
 const routes = generateRoutes(menuRoutes)
@@ -29,4 +23,4 @@ const router = createRouter({
 // 注册路由守卫
 setupRouterGuards(router)
 
-export default router 
+export default router

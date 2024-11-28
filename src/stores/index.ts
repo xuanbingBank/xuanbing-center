@@ -31,10 +31,11 @@ export const useCounterStore = defineStore('counter', () => {
       );
     `)
     // 初始化计数器
-    db.execute(
-      'INSERT OR IGNORE INTO store_counter (key, value, updated_at) VALUES (?, ?, ?)',
-      ['count', 0, null]
-    )
+    db.execute('INSERT OR IGNORE INTO store_counter (key, value, updated_at) VALUES (?, ?, ?)', [
+      'count',
+      0,
+      null
+    ])
   } catch (error) {
     throw createDatabaseError('初始化 Counter Store 失败')
   }
@@ -51,9 +52,9 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   function getStoredHistory(): number[] {
-    return db.query(
-      'SELECT value FROM store_counter_history ORDER BY created_at DESC LIMIT 10'
-    ).map(row => row.value)
+    return db
+      .query('SELECT value FROM store_counter_history ORDER BY created_at DESC LIMIT 10')
+      .map(row => row.value)
   }
 
   function getStoredLastUpdated(): number | null {
@@ -63,7 +64,7 @@ export const useCounterStore = defineStore('counter', () => {
 
   // Getters
   const doubleCount = computed(() => count.value * 2)
-  const lastChangeTime = computed(() => 
+  const lastChangeTime = computed(() =>
     lastUpdated.value ? new Date(lastUpdated.value).toLocaleString() : '从未更新'
   )
 
@@ -74,16 +75,17 @@ export const useCounterStore = defineStore('counter', () => {
       const now = Date.now()
 
       // 更新计数器
-      db.execute(
-        'UPDATE store_counter SET value = ?, updated_at = ? WHERE key = ?',
-        [newValue, now, 'count']
-      )
+      db.execute('UPDATE store_counter SET value = ?, updated_at = ? WHERE key = ?', [
+        newValue,
+        now,
+        'count'
+      ])
 
       // 添加历史记录
-      db.execute(
-        'INSERT INTO store_counter_history (value, created_at) VALUES (?, ?)',
-        [newValue, now]
-      )
+      db.execute('INSERT INTO store_counter_history (value, created_at) VALUES (?, ?)', [
+        newValue,
+        now
+      ])
 
       // 清理旧历史记录
       db.execute(`
@@ -109,10 +111,7 @@ export const useCounterStore = defineStore('counter', () => {
   function reset() {
     db.transaction(() => {
       // 重置计数器
-      db.execute(
-        'UPDATE store_counter SET value = 0, updated_at = NULL WHERE key = ?',
-        ['count']
-      )
+      db.execute('UPDATE store_counter SET value = 0, updated_at = NULL WHERE key = ?', ['count'])
       // 清空历史记录
       db.execute('DELETE FROM store_counter_history')
 
@@ -130,10 +129,11 @@ export const useCounterStore = defineStore('counter', () => {
     db.transaction(() => {
       if (newState.count !== undefined) {
         const now = Date.now()
-        db.execute(
-          'UPDATE store_counter SET value = ?, updated_at = ? WHERE key = ?',
-          [newState.count, now, 'count']
-        )
+        db.execute('UPDATE store_counter SET value = ?, updated_at = ? WHERE key = ?', [
+          newState.count,
+          now,
+          'count'
+        ])
         count.value = newState.count
         lastUpdated.value = now
       }
@@ -176,15 +176,15 @@ export const useCounterStore = defineStore('counter', () => {
  */
 export function useCounter() {
   const store = useCounterStore()
-  
+
   // 自定义组合函数
   const incrementByTen = () => store.increment(10)
   const decrementByTen = () => store.decrement(10)
-  
+
   // 导出扩展的功能
   return {
     ...store,
     incrementByTen,
     decrementByTen
   }
-} 
+}

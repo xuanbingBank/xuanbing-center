@@ -104,7 +104,7 @@ export class DBManager {
   queryOne<T = any>(sql: string, params: any[] = []): T | null {
     try {
       const stmt = this.db.prepare(sql)
-      return stmt.get(params) as T || null
+      return (stmt.get(params) as T) || null
     } catch (error: Error | unknown) {
       const message = error instanceof Error ? error.message : String(error)
       throw createDatabaseError(`查询失败: ${message}`)
@@ -162,4 +162,4 @@ export class DBManager {
 }
 
 // 导出数据库实例
-export const db = DBManager.getInstance() 
+export const db = DBManager.getInstance()

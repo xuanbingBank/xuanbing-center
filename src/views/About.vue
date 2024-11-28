@@ -2,9 +2,7 @@
   <div class="about">
     <h1>{{ message }}</h1>
     <p>Current count from store: {{ counter.count }}</p>
-    <el-button type="primary" @click="$router.push('/')">
-      Back to Home
-    </el-button>
+    <el-button type="primary" @click="$router.push('/')"> Back to Home </el-button>
   </div>
 </template>
 
@@ -31,4 +29,4 @@ export default defineComponent({
   padding: 20px;
   text-align: center;
 }
-</style> 
+</style>
