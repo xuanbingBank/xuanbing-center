@@ -10,7 +10,8 @@ export function generateRoutes(menuRoutes: MenuItem[]): RouteRecordRaw[] {
       path: menuItem.path,
       name: menuItem.name,
       component: menuItem.component,
-      meta: menuItem.meta
+      meta: menuItem.meta,
+      children: []
     }
 
     if (menuItem.children?.length) {
@@ -18,7 +19,8 @@ export function generateRoutes(menuRoutes: MenuItem[]): RouteRecordRaw[] {
         path: child.path.replace(menuItem.path + '/', ''), // 移除父路径前缀
         name: child.name,
         component: child.component,
-        meta: child.meta
+        meta: child.meta,
+        children: []
       }))
     }
 
