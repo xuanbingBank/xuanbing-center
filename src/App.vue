@@ -1,23 +1,16 @@
 <template>
   <el-container class="app-container" :class="{ dark: isDark }">
     <!-- 顶栏 -->
-    <el-header class="app-header">
-      <div class="header-logo">XuanBing Center</div>
-      <div class="header-actions">
-        <el-button @click="handleToggleDark">
-          <el-icon>
-            <component :is="isDark ? Sunny : Moon" />
-          </el-icon>
-        </el-button>
-      </div>
-    </el-header>
+    <app-header />
 
-    <el-container>
+    <!-- 主体内容区 -->
+    <el-container class="main-container">
       <!-- 侧边栏 -->
       <side-menu />
 
-      <!-- 主要内容区 -->
-      <el-container>
+      <!-- 右侧内容区 -->
+      <el-container class="right-container">
+        <!-- 主要内容区 -->
         <el-main>
           <router-view v-slot="{ Component }">
             <transition name="fade" mode="out-in">
@@ -36,17 +29,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useDark } from '@vueuse/core'
 import SideMenu from './layouts/SideMenu.vue'
-import { useDark, useToggle } from '@vueuse/core'
-import { Moon, Sunny } from '@element-plus/icons-vue'
+import AppHeader from './layouts/AppHeader.vue'
 
 const isDark = useDark()
-const toggleDark = useToggle(isDark)
-
-// 处理暗色模式切换
-const handleToggleDark = (evt: MouseEvent) => {
-  toggleDark()
-}
 </script>
 
 <style lang="less" scoped>
@@ -59,33 +46,26 @@ const handleToggleDark = (evt: MouseEvent) => {
 
 .app-container {
   height: 100vh;
-}
-
-.app-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: @bg-base;
-  border-bottom: @border-width-base @border-style-base @border-color-base;
-  padding: 0 @spacing-lg;
-  height: @header-height;
+  flex-direction: column;
 }
 
-.header-logo {
-  font-size: @font-size-xl;
-  font-weight: bold;
-  color: @text-primary;
+.main-container {
+  flex: 1;
+  overflow: hidden;
 }
 
-.header-actions {
+.right-container {
   display: flex;
-  align-items: center;
-  gap: @spacing-sm;
+  flex-direction: column;
+  min-width: 0; // 防止内容溢出
 }
 
 .el-main {
   background-color: @bg-light;
   padding: @spacing-lg;
+  flex: 1;
+  overflow: auto;
 }
 
 .el-footer {
