@@ -21,7 +21,12 @@ export default defineConfig({
         additionalData: `@import "@/styles/variables.less";`
       }
     },
-    postcss: './postcss.config.js'
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    }
   },
   base: './',
   build: {

@@ -1,74 +1,44 @@
 <template>
-  <el-header class="app-header">
-    <div class="header-logo">XuanBing Center</div>
-    <div class="header-actions">
-      <el-button class="action-btn">
-        <el-icon>
-          <Remove />
-        </el-icon>
-      </el-button>
-      <el-button class="action-btn">
-        <el-icon>
-          <FullScreen />
-        </el-icon>
-      </el-button>
-      <el-button class="action-btn close-btn">
-        <el-icon>
-          <Close />
-        </el-icon>
-      </el-button>
+  <header class="h-[50px] flex items-center justify-between bg-base-100 border-b border-base-300 [&]:webkit-app-region-drag">
+    <!-- Logo -->
+    <div class="text-xl font-bold text-base-content px-6">XuanBing Center</div>
+
+    <!-- Window Controls -->
+    <div class="flex items-center [&]:webkit-app-region-no-drag">
+      <!-- Minimize -->
+      <button 
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200"
+      >
+        <font-awesome-icon icon="window-minimize" />
+      </button>
+
+      <!-- Maximize -->
+      <button 
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200"
+      >
+        <font-awesome-icon icon="window-maximize" />
+      </button>
+
+      <!-- Close -->
+      <button 
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-error hover:text-white"
+      >
+        <font-awesome-icon icon="xmark" />
+      </button>
     </div>
-  </el-header>
+  </header>
 </template>
 
 <script lang="ts" setup>
-import { Remove, FullScreen, Close } from '@element-plus/icons-vue'
+// 不需要单独导入图标，因为已经在 fontawesome.ts 中全局注册
 </script>
 
-<style lang="less" scoped>
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: @bg-base;
-  border-bottom: @border-width-base @border-style-base @border-color-base;
-  padding: 0 @spacing-lg;
-  height: @header-height;
-  -webkit-app-region: drag; // 允许拖拽窗口
+<style>
+.webkit-app-region-drag {
+  -webkit-app-region: drag;
 }
 
-.header-logo {
-  font-size: @font-size-xl;
-  font-weight: bold;
-  color: @text-primary;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: @spacing-sm;
-  -webkit-app-region: no-drag; // 按钮区域不允许拖拽
-}
-
-.action-btn {
-  padding: 4px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  transition: background-color @animation-duration-base @animation-timing-function-base;
-
-  &:hover {
-    background-color: @menu-item-hover-bg;
-  }
-
-  .el-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  &.close-btn:hover {
-    background-color: #e81123;
-    color: white;
-  }
+.webkit-app-region-no-drag {
+  -webkit-app-region: no-drag;
 }
 </style> 
