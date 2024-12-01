@@ -110,7 +110,7 @@ onMounted(() => {
     overflow: hidden;
 
     &--collapsed {
-      width: 64px;
+      width: 30px;
     }
 
     &-list {
@@ -203,7 +203,7 @@ onMounted(() => {
 .side-menu__secondary--collapsed {
   :deep(.el-menu-item),
   :deep(.el-sub-menu__title) {
-    padding-right: 0 !important;
+    padding: 0 5px !important;
 
     span {
       width: 0;
