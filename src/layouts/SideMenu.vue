@@ -39,6 +39,7 @@
         class="side-menu__secondary-list"
         router
         :collapse="isCollapsed"
+        :collapse-transition="false"
         @select="handleSelect"
       >
         <template v-if="currentModuleRoute">
@@ -107,15 +108,16 @@ onMounted(() => {
     width: @secondary-menu-width;
     background-color: @menu-bg;
     border-right: @border-width-base @border-style-base @border-color-base;
-    transition: @animation-duration-base;
+    transition: width @animation-duration-base @animation-timing-function-base;
     position: relative;
+    overflow: hidden;
 
     &--collapsed {
       width: 64px;
+    }
 
-      .side-menu__collapse-icon {
-        transform: rotate(180deg);
-      }
+    &-list {
+      width: @secondary-menu-width !important;
     }
 
     &-header {
@@ -126,10 +128,6 @@ onMounted(() => {
       padding: 0 @spacing-sm;
       cursor: pointer;
       border-bottom: @border-width-base @border-style-base @border-color-split;
-    }
-
-    &-list {
-      border-right: none;
     }
   }
 
@@ -166,9 +164,37 @@ onMounted(() => {
 
 :deep(.el-menu) {
   border-right: none;
+  transition: none !important;
 
   &--collapse {
-    width: 64px;
+    width: @secondary-menu-width !important;
+  }
+}
+
+:deep(.el-menu-item),
+:deep(.el-sub-menu__title) {
+  transition: padding-left @animation-duration-base @animation-timing-function-base;
+
+  .el-icon {
+    transition: margin-right @animation-duration-base @animation-timing-function-base;
+  }
+
+  span {
+    display: inline-block;
+    opacity: 1;
+    transition: opacity @animation-duration-base @animation-timing-function-base;
+  }
+}
+
+.side-menu__secondary--collapsed {
+  :deep(.el-menu-item),
+  :deep(.el-sub-menu__title) {
+    padding-right: 0 !important;
+
+    span {
+      width: 0;
+      opacity: 0;
+    }
   }
 }
 
