@@ -163,4 +163,8 @@ declare interface SystemConfig {
     /** 备份路径 */
     backupPath: string
   }
-} 
+}
+
+declare module '@fortawesome/vue-fontawesome'
+declare module '@fortawesome/fontawesome-svg-core'
+declare module '@fortawesome/free-solid-svg-icons'
