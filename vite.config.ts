@@ -20,7 +20,8 @@ export default defineConfig({
       less: {
         additionalData: `@import "@/styles/variables.less";`
       }
-    }
+    },
+    postcss: './postcss.config.js'
   },
   base: './',
   build: {
