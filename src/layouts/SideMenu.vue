@@ -26,14 +26,6 @@
 
     <!-- 二级菜单 -->
     <div class="side-menu__secondary" :class="{ 'side-menu__secondary--collapsed': isCollapsed }">
-      <div class="side-menu__secondary-header" @click="toggleCollapse">
-        <el-icon
-          class="side-menu__collapse-icon"
-          :class="{ 'side-menu__collapse-icon--collapsed': isCollapsed }"
-        >
-          <ArrowRight />
-        </el-icon>
-      </div>
       <el-menu
         :default-active="activeRoute"
         class="side-menu__secondary-list"
@@ -50,6 +42,11 @@
           />
         </template>
       </el-menu>
+      <div class="side-menu__collapse-button" @click="toggleCollapse">
+        <el-icon :class="{ 'is-collapsed': isCollapsed }">
+          <ArrowRight />
+        </el-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -118,30 +115,47 @@ onMounted(() => {
 
     &-list {
       width: @secondary-menu-width !important;
+      height: 100%;
     }
 
-    &-header {
-      height: @menu-item-height;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 @spacing-sm;
-      cursor: pointer;
-      border-bottom: @border-width-base @border-style-base @border-color-split;
+    &:hover {
+      .side-menu__collapse-button {
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
 
-  &__collapse-icon {
-    font-size: @font-size-base;
-    color: @text-secondary;
-    transition: transform @animation-duration-base @animation-timing-function-base;
+  &__collapse-button {
+    position: absolute;
+    top: 50%;
+    right: -1px;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: @border-color-split;
+    cursor: pointer;
+    border-radius: 2px 0 0 2px;
+    border: 1px solid @border-color-base;
+    border-right: none;
+    transition: all @animation-duration-base @animation-timing-function-base;
+    opacity: 0;
+    z-index: 10;
 
-    &:hover {
-      color: @primary-color;
-    }
+    .el-icon {
+      font-size: 12px;
+      color: @text-secondary;
+      transition: transform @animation-duration-base @animation-timing-function-base;
 
-    &--collapsed {
-      transform: rotate(180deg);
+      &.is-collapsed {
+        transform: rotate(180deg);
+      }
     }
   }
 }
