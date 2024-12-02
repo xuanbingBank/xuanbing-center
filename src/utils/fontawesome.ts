@@ -6,14 +6,42 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { 
   faWindowMinimize,
   faWindowMaximize,
-  faXmark
+  faXmark,
+  faAngleRight,
+  faHouse,
+  faDisplay,
+  faFolder,
+  faFile,
+  faBoxArchive,
+  faLink,
+  faHeadphones,
+  faVideo,
+  faCode,
+  faWrench,
+  faGear,
+  faCircleInfo,
+  faComments
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
 library.add(
   faWindowMinimize,
   faWindowMaximize,
-  faXmark
+  faXmark,
+  faAngleRight,
+  faHouse,
+  faDisplay,
+  faFolder,
+  faFile,
+  faBoxArchive,
+  faLink,
+  faHeadphones,
+  faVideo,
+  faCode,
+  faWrench,
+  faGear,
+  faCircleInfo,
+  faComments
 )
 
 export { FontAwesomeIcon } 

@@ -8,8 +8,8 @@ export interface RouteMeta extends VueRouteMeta {
   /** 页面标题 */
   title: string
   
-  /** 图标组件 */
-  icon?: Component
+  /** 图标 */
+  icon?: Component | string
   
   /** 所属模块 */
   module?: string

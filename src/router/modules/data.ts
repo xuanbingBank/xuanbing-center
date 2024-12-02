@@ -6,7 +6,7 @@ export const dataRoute: MenuItem = {
   name: 'data',
   meta: {
     title: '数据中心',
-    icon: Folder,
+    icon: 'folder',
     module: 'data'
   },
   children: [
@@ -16,7 +16,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/notes/index.vue'),
       meta: {
         title: '笔记',
-        icon: Document
+        icon: 'file'
       }
     },
     {
@@ -25,7 +25,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/materials/index.vue'),
       meta: {
         title: '素材库',
-        icon: Collection
+        icon: 'box-archive'
       }
     },
     {
@@ -34,7 +34,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/bookmarks/index.vue'),
       meta: {
         title: '网址收藏',
-        icon: Link
+        icon: 'link'
       }
     },
     {
@@ -43,7 +43,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/music/index.vue'),
       meta: {
         title: '音乐库',
-        icon: Headset
+        icon: 'headphones'
       }
     },
     {
@@ -52,7 +52,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/videos/index.vue'),
       meta: {
         title: '视频库',
-        icon: VideoPlay
+        icon: 'video'
       }
     },
     {
@@ -61,7 +61,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/codes/index.vue'),
       meta: {
         title: '代码库',
-        icon: Document
+        icon: 'code'
       }
     },
     {
@@ -70,7 +70,7 @@ export const dataRoute: MenuItem = {
       component: () => import('@/views/data/others/index.vue'),
       meta: {
         title: '其他',
-        icon: Folder
+        icon: 'folder'
       }
     }
   ]

@@ -1,4 +1,3 @@
-import { InfoFilled, ChatDotRound } from '@element-plus/icons-vue'
 import type { MenuItem } from '@/types/menu'
 
 export const aboutRoute: MenuItem = {
@@ -6,7 +5,7 @@ export const aboutRoute: MenuItem = {
   name: 'about',
   meta: {
     title: '关于',
-    icon: InfoFilled,
+    icon: 'circle-info',
     module: 'about'
   },
   children: [
@@ -16,7 +15,7 @@ export const aboutRoute: MenuItem = {
       component: () => import('@/views/about/feedback/index.vue'),
       meta: {
         title: '反馈',
-        icon: ChatDotRound
+        icon: 'comments'
       }
     }
   ]

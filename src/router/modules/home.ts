@@ -1,4 +1,3 @@
-import { HomeFilled, Monitor } from '@element-plus/icons-vue'
 import type { MenuItem } from '../../types/menu'
 
 export const homeRoute: MenuItem = {
@@ -6,7 +5,7 @@ export const homeRoute: MenuItem = {
   name: 'home',
   meta: {
     title: '首页',
-    icon: HomeFilled,
+    icon: 'house',
     module: 'home',
     description: '系统首页',
     keywords: ['首页', '仪表盘', '数据看板'],
@@ -20,7 +19,7 @@ export const homeRoute: MenuItem = {
       component: () => import('@/views/home/dashboard/index.vue'),
       meta: {
         title: '数据看板',
-        icon: HomeFilled,
+        icon: 'house',
         keepAlive: true,
         description: '系统数据总览',
         type: 'list',
@@ -34,7 +33,7 @@ export const homeRoute: MenuItem = {
       component: () => import('@/views/home/game-screen/index.vue'),
       meta: {
         title: '游戏副屏',
-        icon: Monitor,
+        icon: 'display',
         keepAlive: false,
         description: '游戏辅助显示界面',
         type: 'other',

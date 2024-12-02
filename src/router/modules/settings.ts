@@ -1,4 +1,3 @@
-import { Setting } from '@element-plus/icons-vue'
 import type { MenuItem } from '@/types/menu'
 
 export const settingsRoute: MenuItem = {
@@ -7,7 +6,7 @@ export const settingsRoute: MenuItem = {
   component: () => import('@/views/settings/index.vue'),
   meta: {
     title: '设置',
-    icon: Setting,
+    icon: 'gear',
     module: 'settings',
     isBottom: true
   },
