@@ -2,6 +2,8 @@
  * @description 全局类型定义文件
  */
 
+import { defineComponent } from 'vue'
+
 // 环境变量类型定义
 interface ImportMetaEnv {
   /** API基础路径 */
