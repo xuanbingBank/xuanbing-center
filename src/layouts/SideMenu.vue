@@ -5,7 +5,7 @@
       <div class="flex flex-col h-full justify-between">
         <!-- 顶部菜单 -->
         <ul class="menu menu-sm bg-base-200 p-0">
-          <li v-for="route in topMenus" :key="route.name">
+          <li v-for="route in topMenus" :key="route.name" class="my-1">
             <a
               class="rounded-none"
               :class="{ 'active': activeModule === route.meta?.module }"
