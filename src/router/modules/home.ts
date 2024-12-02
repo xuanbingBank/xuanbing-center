@@ -1,22 +1,19 @@
-import type { MenuItem } from '../../types/menu'
+import { RouteRecordRaw } from 'vue-router'
+import { loadView } from '../../utils/router'
 
-export const homeRoute: MenuItem = {
+export const homeRoute: RouteRecordRaw = {
   path: '/home',
   name: 'home',
   meta: {
     title: '首页',
     icon: 'house',
-    module: 'home',
-    description: '系统首页',
-    keywords: ['首页', '仪表盘', '数据看板'],
-    type: 'list',
-    sort: 1
+    module: 'home'
   },
   children: [
     {
       path: '/home/dashboard',
       name: 'dashboard',
-      component: () => import('@/views/home/dashboard/index.vue'),
+      component: loadView('home/dashboard/index'),
       meta: {
         title: '数据看板',
         icon: 'house',
@@ -30,7 +27,7 @@ export const homeRoute: MenuItem = {
     {
       path: '/home/game-screen',
       name: 'gameScreen',
-      component: () => import('@/views/home/game-screen/index.vue'),
+      component: loadView('home/game-screen/index'),
       meta: {
         title: '游戏副屏',
         icon: 'display',

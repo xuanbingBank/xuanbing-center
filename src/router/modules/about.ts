@@ -1,6 +1,7 @@
-import type { MenuItem } from '@/types/menu'
+import { RouteRecordRaw } from 'vue-router'
+import { loadView } from '../../utils/router'
 
-export const aboutRoute: MenuItem = {
+export const aboutRoute: RouteRecordRaw = {
   path: '/about',
   name: 'about',
   meta: {
@@ -12,7 +13,7 @@ export const aboutRoute: MenuItem = {
     {
       path: '/about/feedback',
       name: 'feedback',
-      component: () => import('@/views/about/feedback/index.vue'),
+      component: loadView('about/feedback/index'),
       meta: {
         title: '反馈',
         icon: 'comments'

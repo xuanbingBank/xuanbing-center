@@ -1,7 +1,8 @@
-import { Folder, Collection, Link, Headset, VideoPlay, Document } from '@element-plus/icons-vue'
-import type { MenuItem } from '@/types/menu'
+import { RouteRecordRaw } from 'vue-router'
+import { loadView } from '../../utils/router'
 
-export const dataRoute: MenuItem = {
+
+export const dataRoute: RouteRecordRaw = {
   path: '/data',
   name: 'data',
   meta: {
@@ -13,7 +14,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/notes',
       name: 'notes',
-      component: () => import('@/views/data/notes/index.vue'),
+      component: loadView('data/notes/index'),
       meta: {
         title: '笔记',
         icon: 'file'
@@ -22,7 +23,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/materials',
       name: 'materials',
-      component: () => import('@/views/data/materials/index.vue'),
+      component: loadView('data/materials/index'),
       meta: {
         title: '素材库',
         icon: 'box-archive'
@@ -31,7 +32,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/bookmarks',
       name: 'bookmarks',
-      component: () => import('@/views/data/bookmarks/index.vue'),
+      component: loadView('data/bookmarks/index'),
       meta: {
         title: '网址收藏',
         icon: 'link'
@@ -40,7 +41,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/music',
       name: 'music',
-      component: () => import('@/views/data/music/index.vue'),
+      component: loadView('data/music/index'),
       meta: {
         title: '音乐库',
         icon: 'headphones'
@@ -49,7 +50,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/videos',
       name: 'videos',
-      component: () => import('@/views/data/videos/index.vue'),
+      component: loadView('data/videos/index'),
       meta: {
         title: '视频库',
         icon: 'video'
@@ -58,7 +59,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/codes',
       name: 'codes',
-      component: () => import('@/views/data/codes/index.vue'),
+      component: loadView('data/codes/index'),
       meta: {
         title: '代码库',
         icon: 'code'
@@ -67,7 +68,7 @@ export const dataRoute: MenuItem = {
     {
       path: '/data/others',
       name: 'others',
-      component: () => import('@/views/data/others/index.vue'),
+      component: loadView('data/others/index'),
       meta: {
         title: '其他',
         icon: 'folder'

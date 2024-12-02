@@ -1,9 +1,9 @@
-import type { MenuItem } from '@/types/menu'
+import { RouteRecordRaw } from 'vue-router'
+import { loadView } from '../../utils/router'
 
-export const settingsRoute: MenuItem = {
+export const settingsRoute: RouteRecordRaw = {
   path: '/settings',
   name: 'settings',
-  component: () => import('@/views/settings/index.vue'),
   meta: {
     title: '设置',
     icon: 'gear',
@@ -14,7 +14,7 @@ export const settingsRoute: MenuItem = {
     {
       path: '/settings/theme',
       name: 'themeSettings',
-      component: () => import('@/views/settings/theme.vue'),
+      component: loadView('settings/theme'),
       meta: {
         title: '主题设置'
       }
@@ -22,7 +22,7 @@ export const settingsRoute: MenuItem = {
     {
       path: '/settings/data',
       name: 'dataSettings',
-      component: () => import('@/views/settings/data.vue'),
+      component: loadView('settings/data'),
       meta: {
         title: '数据中心设置'
       }
@@ -30,7 +30,7 @@ export const settingsRoute: MenuItem = {
     {
       path: '/settings/backup',
       name: 'backupSettings',
-      component: () => import('@/views/settings/backup.vue'),
+      component: loadView('settings/backup'),
       meta: {
         title: '备份设置'
       }
@@ -38,7 +38,7 @@ export const settingsRoute: MenuItem = {
     {
       path: '/settings/other',
       name: 'otherSettings',
-      component: () => import('@/views/settings/other.vue'),
+      component: loadView('settings/other'),
       meta: {
         title: '其他设置'
       }

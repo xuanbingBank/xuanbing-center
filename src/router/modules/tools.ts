@@ -1,6 +1,7 @@
-import type { MenuItem } from '@/types/menu'
+import { RouteRecordRaw } from 'vue-router'
+import { loadView } from '../../utils/router'
 
-export const toolsRoute: MenuItem = {
+export const toolsRoute: RouteRecordRaw = {
   path: '/tools',
   name: 'tools',
   meta: {
@@ -12,7 +13,7 @@ export const toolsRoute: MenuItem = {
     {
       path: '/tools/features',
       name: 'toolFeatures',
-      component: () => import('@/views/tools/features.vue'),
+      component: loadView('tools/features/index'),
       meta: {
         title: '小功能组',
         icon: 'wrench'
