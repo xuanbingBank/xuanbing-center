@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full" ref="menuContainerRef">
+  <div class="flex h-full b" ref="menuContainerRef">
     <!-- 一级菜单 -->
     <div class="w-[40px] flex-shrink-0 bg-base-200 border-r border-base-300">
       <div class="flex flex-col h-full justify-between">
@@ -41,13 +41,16 @@
 
     <!-- 二级菜单 -->
     <div 
-      class="bg-base-100 border-r border-base-300 transition-all duration-300 relative overflow-hidden"
+      class="bg-[#1e1e1e] border-r border-base-300 transition-all duration-300 relative overflow-hidden"
       :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
     >
-      <ul class="menu menu-sm p-0 w-[150px]">
+      <ul class="menu menu-sm p-0"
+          :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
+      >
         <template v-if="currentModuleRoute?.children">
           <recursive-menu-item
             v-for="route in currentModuleRoute.children"
+            class="px-3 [&_.active]:!bg-[#141414]"
             :key="route.path"
             :menu-item="route"
             :is-active="activeRoute === route.path"
@@ -64,7 +67,6 @@
                cursor-pointer group"
         @click="toggleCollapse"
       >
-        <div class="absolute inset-y-0 -left-[1px] w-[1px] bg-base-300 group-hover:bg-primary transition-colors"></div>
         <div 
           class="w-full h-full bg-base-200 group-hover:bg-base-300
                  border border-r-0 border-base-300 group-hover:border-primary

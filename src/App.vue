@@ -11,7 +11,7 @@
       <!-- 右侧内容区 -->
       <div class="flex flex-col flex-1 min-w-0">
         <!-- 主要内容区 -->
-        <main class="flex-1 overflow-auto bg-base-200 p-6">
+        <main class="flex-1 overflow-auto bg-base-150 p-6">
           <router-view v-slot="{ Component }">
             <transition name="fade" mode="out-in">
               <component :is="Component" />
