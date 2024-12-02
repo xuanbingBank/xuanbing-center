@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 import { initAppPaths } from '../src/utils/paths'
 
@@ -11,9 +11,13 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1200,
     height: 800,
+    frame: false,
+    transparent: false,
+    backgroundColor: '#fff',
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
@@ -44,4 +48,21 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
+})
+
+// 窗口控制事件监听
+ipcMain.on('window-minimize', () => {
+  win?.minimize()
+})
+
+ipcMain.on('window-toggle-maximize', () => {
+  if (win?.isMaximized()) {
+    win.restore()
+  } else {
+    win?.maximize()
+  }
+})
+
+ipcMain.on('window-close', () => {
+  win?.close()
 }) 

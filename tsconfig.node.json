@@ -10,6 +10,7 @@
   "include": [
     "vite.config.ts",
     "electron/**/*.ts",
+    "src/**/*.ts",
     "package.json"
   ]
 } 
