@@ -36,7 +36,7 @@
   </li>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .menu-item {
   @apply flex items-center h-[36px] hover:bg-base-300 transition-all duration-300;
 }
