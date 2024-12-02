@@ -4,9 +4,13 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStorage, useLocalStorage } from '@vueuse/core'
-import { menuRoutes } from '@/router'
-import type { MenuItem } from '@/types/menu'
+import { menuRoutes } from '../router'
+import type { MenuItem } from '../types/menu'
 
+/**
+ * @description 菜单相关的逻辑封装
+ * @returns {Object} 菜单相关的状态和方法
+ */
 export function useMenu() {
   // 持久化状态
   const isCollapsed = useLocalStorage('xuanbing-menu-collapsed', false)
