@@ -13,7 +13,7 @@ export const toolsRoute: RouteRecordRaw = {
     {
       path: '/tools/features',
       name: 'toolFeatures',
-      component: loadView('tools/index'),
+      component: loadView('tools/features/index'),
       meta: {
         title: '小功能组',
         icon: 'wrench'
