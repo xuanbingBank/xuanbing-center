@@ -1,5 +1,5 @@
 <template>
-  <header class="h-[50px] flex items-center justify-between bg-base-100 border-b border-base-300 webkit-app-region-drag">
+  <header class="h-[50px] flex items-center justify-between bg-base-100 border-b border-base-300 webkit-app-region-drag transition-[background-color,border-color,color] duration-300">
     <!-- Logo -->
     <div class="text-xl font-bold text-base-content px-6 flex-1">XuanBing Center</div>
 

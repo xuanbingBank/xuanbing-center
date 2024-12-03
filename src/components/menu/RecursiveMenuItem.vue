@@ -11,11 +11,11 @@
       <font-awesome-icon
         v-if="props.menuItem.meta?.icon"
         :icon="['fas', props.menuItem.meta.icon as string]"
-        class="text-sm"
+        class="text-sm transition-all duration-300"
       />
       <span 
         v-if="!isCollapsed"
-        class="text-sm"
+        class="text-sm transition-all duration-300"
       >
         {{ props.menuItem.meta?.title }}
       </span>
@@ -38,15 +38,25 @@
 
 <style scoped lang="postcss">
 .menu-item {
-  @apply flex items-center h-[36px] hover:bg-base-300 transition-all duration-300;
+  @apply flex items-center h-[36px] hover:bg-base-300/50 
+         transition-all duration-300
+         text-base-content/70 hover:text-base-content;
+
+  &, & * {
+    @apply transition-all duration-300;
+  }
 }
 
 .menu-item.active {
-  @apply bg-base-300;
+  @apply bg-primary text-primary-content;
+
+  &, & * {
+    @apply transition-all duration-300;
+  }
 }
 
 .menu-item.active:before {
-  @apply content-[''] absolute left-0 h-full w-1 bg-primary;
+  @apply content-[''] absolute left-0 h-full w-1 bg-primary/80;
 }
 
 .menu-item.active.justify-center:before {
