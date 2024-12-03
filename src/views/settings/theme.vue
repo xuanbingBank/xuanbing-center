@@ -20,14 +20,15 @@
             <!-- 选择按钮 -->
             <label 
               class="btn btn-outline gap-2 justify-start px-3 py-2 h-auto min-h-0"
-              :class="{ 'btn-active': selectedMode === mode.value }"
+              :class="{ 'btn-active': themeStore.mode === mode.value }"
             >
               <input 
                 type="radio" 
                 name="theme-mode" 
                 class="radio radio-xs radio-primary" 
                 :value="mode.value"
-                v-model="selectedMode"
+                :checked="themeStore.mode === mode.value"
+                @change="handleModeChange(mode.value)"
               />
               <div class="flex items-center gap-2 text-sm">
                 <font-awesome-icon :icon="mode.icon" class="text-base" />
@@ -38,8 +39,8 @@
             <!-- 效果预览 -->
             <div 
               class="preview-card rounded-lg overflow-hidden border border-base-300 cursor-pointer"
-              :class="{ 'opacity-50': selectedMode !== mode.value }"
-              @click="selectedMode = mode.value"
+              :class="{ 'opacity-50': themeStore.mode !== mode.value }"
+              @click="handleModeChange(mode.value)"
             >
               <div 
                 class="preview-header p-1.5" 
@@ -164,17 +165,19 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useThemeStore } from '@/stores/modules/theme'
+import type { ThemeMode } from '@/stores/modules/theme'
+
+const themeStore = useThemeStore()
 
 /**
  * @description 主题模式选项
  */
 const themeModes = [
-  { value: 'light', label: '浅色模式', icon: 'sun' },
-  { value: 'dark', label: '深色模式', icon: 'moon' },
-  { value: 'system', label: '跟随系统', icon: 'computer' }
-]
-
-const selectedMode = ref('light')
+  { value: 'light' as ThemeMode, label: '浅色模式', icon: 'sun' },
+  { value: 'dark' as ThemeMode, label: '深色模式', icon: 'moon' },
+  { value: 'system' as ThemeMode, label: '跟随系统', icon: 'computer' }
+] as const
 
 /**
  * @description 主题颜色选项
@@ -191,6 +194,11 @@ const themeColors = [
 ]
 
 const selectedColor = ref('default')
+
+// 处理模式切换
+function handleModeChange(value: ThemeMode) {
+  themeStore.setMode(value)
+}
 </script>
 
 <style lang="less" scoped>
