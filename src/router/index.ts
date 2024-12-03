@@ -6,7 +6,7 @@ import { aboutRoute } from './modules/about'
 import { settingsRoute } from './modules/settings'
 import { generateRoutes } from './utils'
 import { setupRouterGuards } from './guards'
-import type { MenuItem } from '@/types/menu'
+import type { MenuItem } from '../types/menu'
 
 // 菜单路由配置
 export const menuRoutes: MenuItem[] = [homeRoute, dataRoute, toolsRoute, aboutRoute, settingsRoute]

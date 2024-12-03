@@ -1,12 +1,12 @@
-import type { Component } from 'vue'
-import type { RouteMeta as VueRouteMeta } from 'vue-router'
+import type { Component, ComponentOptions } from 'vue'
+import type { RouteComponent, RouteMeta as VueRouteMeta } from 'vue-router'
 
 /**
  * @description 扩展的路由元信息
  */
-export interface RouteMeta extends VueRouteMeta {
+export interface RouteMeta extends Partial<VueRouteMeta> {
   /** 页面标题 */
-  title: string
+  title?: string
   
   /** 图标 */
   icon?: Component | string
@@ -59,10 +59,10 @@ export interface MenuItem {
   path: string
   
   /** 路由名称 */
-  name: string
+  name?: string | symbol
   
   /** 组件 */
-  component?: () => Promise<Component>
+  component?: RouteComponent | (() => Promise<Component>)
   
   /** 路由元信息 */
   meta?: RouteMeta

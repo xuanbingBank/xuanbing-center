@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router'
-import type { MenuItem } from '@/types/menu'
+import type { MenuItem } from '../types/menu'
 
 /**
  * @description 生成路由配置
