@@ -2,9 +2,9 @@
  * @description 路由守卫
  */
 import { Router, RouteLocationNormalized } from 'vue-router'
-import { useAppStore } from '@/stores/modules/app'
+import { useAppStore } from '../../stores/modules/app'
 import { ElMessage } from 'element-plus'
-import type { RouteMeta } from '@/types/menu'
+import type { RouteMeta } from '../../types/menu'
 
 /**
  * @description 设置页面标题
