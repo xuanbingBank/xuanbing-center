@@ -2,40 +2,38 @@
   <div class="flex h-full b" ref="menuContainerRef">
     <!-- 一级菜单 -->
     <div 
-      class="w-[40px] flex-shrink-0 bg-base-200 border-r border-base-300 transition-all duration-300"
+      class="w-[40px] flex-shrink-0 bg-base-100 border-r border-base-content/10 transition-all duration-300"
     >
       <div class="flex flex-col h-full justify-between">
         <!-- 顶部菜单 -->
-        <ul class="menu menu-sm bg-base-200 p-0 transition-all duration-300">
+        <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300">
           <li v-for="route in topMenus" :key="route.name" class="my-1">
             <a
-              class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content"
-              :class="{ 'active bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
+              class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
+              :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
               @click="handleModuleSelect(route.meta?.module || '')"
             >
               <font-awesome-icon
                 v-if="route.meta?.icon"
                 :icon="['fas', route.meta.icon as string]"
-                class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-                :class="{ 'text-primary-content': activeModule === route.meta?.module }"
+                class="text-sm transition-all duration-300"
               />
             </a>
           </li>
         </ul>
 
         <!-- 底部菜单 -->
-        <ul class="menu menu-sm bg-base-200 p-0 transition-all duration-300">
+        <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300">
           <li v-for="route in bottomMenus" :key="route.name">
             <a
-              class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content"
-              :class="{ 'active bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
+              class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
+              :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
               @click="handleModuleSelect(route.meta?.module || '')"
             >
               <font-awesome-icon
                 v-if="route.meta?.icon"
                 :icon="['fas', route.meta.icon as string]"
-                class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-                :class="{ 'text-primary-content': activeModule === route.meta?.module }"
+                class="text-sm transition-all duration-300"
               />
             </a>
           </li>
@@ -45,7 +43,7 @@
 
     <!-- 二级菜单 -->
     <div 
-      class="bg-base-200 border-r border-base-300 relative overflow-hidden
+      class="bg-base-100 border-r border-base-content/10 relative overflow-hidden
              transition-all duration-300"
       :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
     >
@@ -55,7 +53,7 @@
         <template v-if="currentModuleRoute?.children">
           <recursive-menu-item
             v-for="route in currentModuleRoute.children"
-            class="px-3 [&_.active]:!bg-base-300 text-base-content/70"
+            class="px-3"
             :key="route.path"
             :menu-item="route"
             :is-active="activeRoute === route.path"
@@ -73,8 +71,8 @@
         @click="toggleCollapse"
       >
         <div 
-          class="w-full h-full bg-base-200 group-hover:bg-base-300
-                 border border-r-0 border-base-300 group-hover:border-primary
+          class="w-full h-full bg-base-100 group-hover:bg-base-200
+                 border border-r-0 border-base-content/10 group-hover:border-primary
                  rounded-l transition-colors flex items-center justify-center"
         >
           <font-awesome-icon

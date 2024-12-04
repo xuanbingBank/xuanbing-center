@@ -12,12 +12,12 @@
         v-if="props.menuItem.meta?.icon"
         :icon="['fas', props.menuItem.meta.icon as string]"
         class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ 'text-base-content': isActive }"
+        :class="{ 'text-primary-content': isActive }"
       />
       <span 
         v-if="!isCollapsed"
         class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ 'text-base-content': isActive }"
+        :class="{ 'text-primary-content': isActive }"
       >
         {{ props.menuItem.meta?.title }}
       </span>
@@ -41,7 +41,7 @@
 <style scoped lang="postcss">
 .menu-item {
   @apply flex items-center h-[36px] 
-         hover:bg-base-300/50 
+         hover:bg-base-200
          transition-all duration-300
          text-base-content/70 hover:text-base-content
          relative;
@@ -52,20 +52,19 @@
 }
 
 .menu-item.active {
-  @apply bg-base-300/50;
+  @apply bg-primary text-primary-content;
 
   &, & * {
-    @apply text-base-content transition-colors duration-300;
+    @apply text-primary-content transition-colors duration-300;
   }
 
   &:hover {
-    @apply bg-base-300/70;
+    @apply bg-primary;
   }
 }
 
 .menu-item.active:before {
-  @apply content-[''] absolute left-0 h-full w-1 
-         bg-primary transition-colors duration-300;
+  @apply hidden;
 }
 
 .menu-item.active.justify-center:before {
