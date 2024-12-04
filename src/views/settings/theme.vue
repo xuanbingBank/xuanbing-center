@@ -1,16 +1,16 @@
 <template>
-  <div class="theme-settings p-6">
+  <div class="theme-settings p-4">
     <!-- 页面标题 -->
-    <div class="mb-8">
-      <h2 class="text-2xl font-bold text-base-content">主题设置</h2>
-      <p class="mt-2 text-base-content/60">自定义应用的外观和主题样式</p>
+    <div class="mb-6">
+      <h2 class="text-xl font-bold text-base-content">主题设置</h2>
+      <p class="mt-1 text-sm text-base-content/60">自定义应用的外观和主题样式</p>
     </div>
 
     <!-- 主题模式选择 -->
-    <div class="card bg-base-100 shadow-xl mb-6">
-      <div class="card-body">
-        <h3 class="card-title text-lg mb-4">主题模式</h3>
-        <div class="grid grid-cols-3 gap-4 max-w-2xl">
+    <div class="card bg-base-100 shadow-md mb-4">
+      <div class="card-body p-4">
+        <h3 class="card-title text-base mb-3">主题模式</h3>
+        <div class="grid grid-cols-3 gap-3 max-w-2xl">
           <!-- 每列包含按钮和对应的预览 -->
           <div 
             v-for="mode in themeModes" 
@@ -80,10 +80,10 @@
     </div>
 
     <!-- 主题色调选择 -->
-    <div class="card bg-base-100 shadow-xl mb-6">
-      <div class="card-body">
-        <h3 class="card-title text-lg mb-4 text-base-content">主题色调</h3>
-        <div class="grid grid-cols-4 gap-4">
+    <div class="card bg-base-100 shadow-md mb-4">
+      <div class="card-body p-4">
+        <h3 class="card-title text-base mb-3">主题色调</h3>
+        <div class="grid grid-cols-4 gap-3">
           <div 
             v-for="color in themeColors" 
             :key="color.name"
@@ -151,12 +151,66 @@
     </div>
 
     <!-- 界面元素圆角设置 -->
-    <div class="card bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h3 class="card-title text-lg mb-4">界面圆角</h3>
-        <div class="flex items-center gap-4">
-          <input type="range" class="range range-primary" min="0" max="20" value="8" />
-          <span class="text-base-content/60">8px</span>
+    <div class="card bg-base-100 shadow-md mb-4">
+      <div class="card-body p-4">
+        <h3 class="card-title text-base mb-3">界面圆角</h3>
+        <div class="flex items-center gap-3">
+          <input type="range" class="range range-primary range-sm" min="0" max="20" value="8" />
+          <span class="text-sm text-base-content/60 min-w-[40px]">8px</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 硬件加速设置 -->
+    <div class="card bg-base-100 shadow-md">
+      <div class="card-body p-4">
+        <h3 class="card-title text-base mb-3">硬件加速</h3>
+        <div class="flex flex-col gap-3">
+          <!-- 开关设置 -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="font-medium text-sm">启用硬件加速</div>
+              <div class="text-xs text-base-content/60 mt-0.5">
+                开启后可提升动画性能，但可能在某些设备上造成视觉故障
+              </div>
+            </div>
+            <input 
+              type="checkbox" 
+              class="toggle toggle-primary toggle-sm"
+              :checked="hardwareAcceleration"
+              @change="toggleHardwareAcceleration"
+            />
+          </div>
+
+          <!-- 加速类型选择 -->
+          <div 
+            class="flex flex-col gap-2"
+            :class="{ 'opacity-50 pointer-events-none': !hardwareAcceleration }"
+          >
+            <div class="font-medium text-sm">加速类型</div>
+            <div class="grid grid-cols-2 gap-3">
+              <label 
+                v-for="type in accelerationTypes" 
+                :key="type.value"
+                class="flex items-center gap-2 p-2.5 border border-base-300 rounded-lg cursor-pointer hover:bg-base-200 transition-colors"
+                :class="{ 'border-primary': selectedAccelerationType === type.value }"
+              >
+                <input
+                  type="radio"
+                  name="acceleration-type"
+                  class="radio radio-primary radio-xs"
+                  :value="type.value"
+                  :checked="selectedAccelerationType === type.value"
+                  :disabled="!hardwareAcceleration"
+                  @change="handleAccelerationTypeChange(type.value)"
+                />
+                <div>
+                  <div class="font-medium text-sm">{{ type.label }}</div>
+                  <div class="text-xs text-base-content/60 mt-0.5">{{ type.description }}</div>
+                </div>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -164,7 +218,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useThemeStore } from '@/stores/modules/theme'
 import type { ThemeMode } from '@/stores/modules/theme'
 
@@ -195,6 +249,23 @@ const themeColors = [
 
 const selectedColor = ref(themeStore.currentTheme)
 
+// 硬件加速相关
+const hardwareAcceleration = ref(localStorage.getItem('hardware-acceleration') === 'true')
+const selectedAccelerationType = ref(localStorage.getItem('acceleration-type') || 'transform3d')
+
+const accelerationTypes = [
+  {
+    value: 'transform3d',
+    label: 'Transform 3D',
+    description: '使用 CSS transform3d 实现硬件加速，性能最佳'
+  },
+  {
+    value: 'transform',
+    label: 'Transform 2D',
+    description: '使用普通 transform 实现，兼容性更好'
+  }
+]
+
 // 处理模式切换
 function handleModeChange(value: ThemeMode) {
   themeStore.setMode(value)
@@ -219,6 +290,46 @@ watch(() => themeStore.mode, (newMode) => {
 function handleColorSelect(color: typeof themeColors[number]) {
   handleColorChange(color.name)
 }
+
+// 切换硬件加速
+function toggleHardwareAcceleration(event: Event) {
+  const checked = (event.target as HTMLInputElement).checked
+  hardwareAcceleration.value = checked
+  localStorage.setItem('hardware-acceleration', String(checked))
+  
+  // 应用硬件加速
+  applyHardwareAcceleration()
+}
+
+// 切换加速类型
+function handleAccelerationTypeChange(type: string) {
+  selectedAccelerationType.value = type
+  localStorage.setItem('acceleration-type', type)
+  
+  // 应用硬件加速
+  applyHardwareAcceleration()
+}
+
+// 应用硬件加速
+function applyHardwareAcceleration() {
+  const style = document.documentElement.style
+  
+  if (!hardwareAcceleration.value) {
+    style.setProperty('--hardware-acceleration', 'none')
+    return
+  }
+  
+  const accelerationValue = selectedAccelerationType.value === 'transform3d'
+    ? 'translate3d(0,0,0)'
+    : 'translateZ(0)'
+  
+  style.setProperty('--hardware-acceleration', accelerationValue)
+}
+
+// 初始化时应用硬件加速
+onMounted(() => {
+  applyHardwareAcceleration()
+})
 </script>
 
 <style lang="less" scoped>
@@ -296,5 +407,27 @@ function handleColorSelect(color: typeof themeColors[number]) {
 // 添加按钮圆角样式
 .btn {
   border-radius: var(--rounded-btn, 0.5rem);
+}
+
+/* 添加硬件加速相关样式 */
+:root {
+  --hardware-acceleration: none;
+}
+
+.hardware-accelerated {
+  transform: var(--hardware-acceleration);
+  backface-visibility: hidden;
+  perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+/* 应用硬件加速到需要的元素 */
+.transition-all,
+.animate-all,
+.menu-item,
+.btn,
+.card {
+  @apply hardware-accelerated;
 }
 </style>
