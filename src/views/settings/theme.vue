@@ -332,18 +332,18 @@ onMounted(() => {
 })
 </script>
 
-<style lang="less" scoped>
+<style lang="postcss" scoped>
 .theme-color-item {
   transition: all 0.2s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  }
+}
 
-  &:active {
-    transform: scale(0.98);
-  }
+.theme-color-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.theme-color-item:active {
+  transform: scale(0.98);
 }
 
 .preview-window {
@@ -351,30 +351,28 @@ onMounted(() => {
   background-color: var(--b1);
 }
 
-// 自定义 toggle 开关样式
-:deep(.toggle) {
-  &:checked {
-    background-color: var(--tglbg);
-    border-color: var(--tglbg);
-  }
+/* 自定义 toggle 开关样式 */
+:deep(.toggle:checked) {
+  background-color: var(--tglbg);
+  border-color: var(--tglbg);
 }
 
 .preview-card {
   min-height: 80px;
   transition: all 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    opacity: 1 !important;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
 }
 
-// 自定义滚动条样式
+.preview-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  opacity: 1 !important;
+}
+
+.preview-card:active {
+  transform: scale(0.98);
+}
+
+/* 自定义滚动条样式 */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -387,39 +385,29 @@ onMounted(() => {
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
 }
 
-// 深色模式下的滚动条
-:global(.dark) {
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-  }
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-// 添加按钮圆角样式
+/* 深色模式下的滚动条 */
+:global(.dark) ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+:global(.dark) ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 添加按钮圆角样式 */
 .btn {
   border-radius: var(--rounded-btn, 0.5rem);
 }
 
-/* 添加硬件加速相关样式 */
+/* 硬件加速相关样式 */
 :root {
   --hardware-acceleration: none;
-}
-
-.hardware-accelerated {
-  transform: var(--hardware-acceleration);
-  backface-visibility: hidden;
-  perspective: 1000;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
 }
 
 /* 应用硬件加速到需要的元素 */
@@ -428,6 +416,10 @@ onMounted(() => {
 .menu-item,
 .btn,
 .card {
-  @apply hardware-accelerated;
+  transform: var(--hardware-acceleration);
+  backface-visibility: hidden;
+  perspective: 1000;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 </style>
