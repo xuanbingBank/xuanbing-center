@@ -12,12 +12,12 @@
         v-if="props.menuItem.meta?.icon"
         :icon="['fas', props.menuItem.meta.icon as string]"
         class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ 'text-primary-content': isActive }"
+        :class="{ '!text-primary-content': isActive }"
       />
       <span 
         v-if="!isCollapsed"
         class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ 'text-primary-content': isActive }"
+        :class="{ '!text-primary-content': isActive }"
       >
         {{ props.menuItem.meta?.title }}
       </span>
@@ -52,14 +52,14 @@
 }
 
 .menu-item.active {
-  @apply bg-primary text-primary-content;
+  @apply !bg-primary !text-primary-content;
 
   &, & * {
-    @apply text-primary-content transition-colors duration-300;
+    @apply !text-primary-content transition-colors duration-300;
   }
 
   &:hover {
-    @apply bg-primary;
+    @apply !bg-primary/90;
   }
 }
 
