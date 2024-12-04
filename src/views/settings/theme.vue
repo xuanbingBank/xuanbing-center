@@ -228,9 +228,9 @@ const themeStore = useThemeStore()
  * @description 主题模式选项
  */
 const themeModes = [
-  { value: 'light' as ThemeMode, label: '浅色模式', icon: 'sun' },
-  { value: 'dark' as ThemeMode, label: '深色模式', icon: 'moon' },
-  { value: 'system' as ThemeMode, label: '跟随系统', icon: 'computer' }
+  { value: 'light' as ThemeMode, label: '浅色模式', icon: ['fas', 'sun'] },
+  { value: 'dark' as ThemeMode, label: '深色模式', icon: ['fas', 'moon'] },
+  { value: 'system' as ThemeMode, label: '跟随系统', icon: ['fas', 'desktop'] }
 ] as const
 
 /**

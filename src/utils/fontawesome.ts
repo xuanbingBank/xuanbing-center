@@ -24,7 +24,10 @@ import {
   faPalette,
   faDatabase,
   faCloudArrowUp,
-  faSliders
+  faSliders,
+  faSun,
+  faMoon,
+  faDesktop
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
@@ -49,7 +52,10 @@ library.add(
   faPalette,
   faDatabase,
   faCloudArrowUp,
-  faSliders
+  faSliders,
+  faSun,
+  faMoon,
+  faDesktop
 )
 
 export { FontAwesomeIcon } 
