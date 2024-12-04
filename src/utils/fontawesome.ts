@@ -20,7 +20,11 @@ import {
   faWrench,
   faGear,
   faCircleInfo,
-  faComments
+  faComments,
+  faPalette,
+  faDatabase,
+  faCloudArrowUp,
+  faSliders
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
@@ -41,7 +45,11 @@ library.add(
   faWrench,
   faGear,
   faCircleInfo,
-  faComments
+  faComments,
+  faPalette,
+  faDatabase,
+  faCloudArrowUp,
+  faSliders
 )
 
 export { FontAwesomeIcon } 

@@ -16,7 +16,8 @@ export const settingsRoute: RouteRecordRaw = {
       name: 'themeSettings',
       component: loadView('settings/theme'),
       meta: {
-        title: '主题设置'
+        title: '主题设置',
+        icon: 'palette'
       }
     },
     {
@@ -24,7 +25,8 @@ export const settingsRoute: RouteRecordRaw = {
       name: 'dataSettings',
       component: loadView('settings/data'),
       meta: {
-        title: '数据中心设置'
+        title: '数据设置',
+        icon: 'database'
       }
     },
     {
@@ -32,7 +34,8 @@ export const settingsRoute: RouteRecordRaw = {
       name: 'backupSettings',
       component: loadView('settings/backup'),
       meta: {
-        title: '备份设置'
+        title: '备份设置',
+        icon: 'cloud-arrow-up'
       }
     },
     {
@@ -40,7 +43,8 @@ export const settingsRoute: RouteRecordRaw = {
       name: 'otherSettings',
       component: loadView('settings/other'),
       meta: {
-        title: '其他设置'
+        title: '其他设置',
+        icon: 'sliders'
       }
     }
   ]
