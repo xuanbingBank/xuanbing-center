@@ -177,7 +177,7 @@
             <input 
               type="checkbox" 
               class="toggle toggle-primary toggle-sm"
-              :checked="hardwareAcceleration"
+              :checked="themeStore.hardwareAcceleration"
               @change="toggleHardwareAcceleration"
             />
           </div>
@@ -185,7 +185,7 @@
           <!-- 加速类型选择 -->
           <div 
             class="flex flex-col gap-2"
-            :class="{ 'opacity-50 pointer-events-none': !hardwareAcceleration }"
+            :class="{ 'opacity-50 pointer-events-none': !themeStore.hardwareAcceleration }"
           >
             <div class="font-medium text-sm">加速类型</div>
             <div class="grid grid-cols-2 gap-3">
@@ -193,15 +193,15 @@
                 v-for="type in accelerationTypes" 
                 :key="type.value"
                 class="flex items-center gap-2 p-2.5 border border-base-300 rounded-lg cursor-pointer hover:bg-base-200 transition-colors"
-                :class="{ 'border-primary': selectedAccelerationType === type.value }"
+                :class="{ 'border-primary': themeStore.accelerationType === type.value }"
               >
                 <input
                   type="radio"
                   name="acceleration-type"
                   class="radio radio-primary radio-xs"
                   :value="type.value"
-                  :checked="selectedAccelerationType === type.value"
-                  :disabled="!hardwareAcceleration"
+                  :checked="themeStore.accelerationType === type.value"
+                  :disabled="!themeStore.hardwareAcceleration"
                   @change="handleAccelerationTypeChange(type.value)"
                 />
                 <div>
@@ -294,41 +294,17 @@ function handleColorSelect(color: typeof themeColors[number]) {
 // 切换硬件加速
 function toggleHardwareAcceleration(event: Event) {
   const checked = (event.target as HTMLInputElement).checked
-  hardwareAcceleration.value = checked
-  localStorage.setItem('hardware-acceleration', String(checked))
-  
-  // 应用硬件加速
-  applyHardwareAcceleration()
+  themeStore.setHardwareAcceleration(checked)
 }
 
 // 切换加速类型
 function handleAccelerationTypeChange(type: string) {
-  selectedAccelerationType.value = type
-  localStorage.setItem('acceleration-type', type)
-  
-  // 应用硬件加速
-  applyHardwareAcceleration()
-}
-
-// 应用硬件加速
-function applyHardwareAcceleration() {
-  const style = document.documentElement.style
-  
-  if (!hardwareAcceleration.value) {
-    style.setProperty('--hardware-acceleration', 'none')
-    return
-  }
-  
-  const accelerationValue = selectedAccelerationType.value === 'transform3d'
-    ? 'translate3d(0,0,0)'
-    : 'translateZ(0)'
-  
-  style.setProperty('--hardware-acceleration', accelerationValue)
+  themeStore.setAccelerationType(type)
 }
 
 // 初始化时应用硬件加速
 onMounted(() => {
-  applyHardwareAcceleration()
+  themeStore.initHardwareAcceleration()
 })
 </script>
 
