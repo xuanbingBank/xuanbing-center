@@ -10,13 +10,14 @@
           <li v-for="route in topMenus" :key="route.name" class="my-1">
             <a
               class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content"
-              :class="{ 'active bg-primary text-primary-content': activeModule === route.meta?.module }"
+              :class="{ 'active bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
               @click="handleModuleSelect(route.meta?.module || '')"
             >
               <font-awesome-icon
                 v-if="route.meta?.icon"
                 :icon="['fas', route.meta.icon as string]"
-                class="text-sm transition-all duration-300"
+                class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
+                :class="{ 'text-primary-content': activeModule === route.meta?.module }"
               />
             </a>
           </li>
@@ -27,13 +28,14 @@
           <li v-for="route in bottomMenus" :key="route.name">
             <a
               class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content"
-              :class="{ 'active bg-primary text-primary-content': activeModule === route.meta?.module }"
+              :class="{ 'active bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
               @click="handleModuleSelect(route.meta?.module || '')"
             >
               <font-awesome-icon
                 v-if="route.meta?.icon"
                 :icon="['fas', route.meta.icon as string]"
-                class="text-sm transition-all duration-300"
+                class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
+                :class="{ 'text-primary-content': activeModule === route.meta?.module }"
               />
             </a>
           </li>
@@ -53,7 +55,7 @@
         <template v-if="currentModuleRoute?.children">
           <recursive-menu-item
             v-for="route in currentModuleRoute.children"
-            class="px-3 [&_.active]:!bg-base-300"
+            class="px-3 [&_.active]:!bg-base-300 text-base-content/70"
             :key="route.path"
             :menu-item="route"
             :is-active="activeRoute === route.path"

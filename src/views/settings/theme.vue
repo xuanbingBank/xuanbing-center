@@ -82,7 +82,7 @@
     <!-- 主题色调选择 -->
     <div class="card bg-base-100 shadow-xl mb-6">
       <div class="card-body">
-        <h3 class="card-title text-lg mb-4">主题色调</h3>
+        <h3 class="card-title text-lg mb-4 text-base-content">主题色调</h3>
         <div class="grid grid-cols-4 gap-4">
           <div 
             v-for="color in themeColors" 
