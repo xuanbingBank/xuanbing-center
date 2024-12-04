@@ -12,7 +12,6 @@ export default {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    // 只使用指定的主题
     themes: [
       {
         light: {
@@ -40,14 +39,56 @@ export default {
           "base-200": "#141414",
           "base-300": "#000000",
           "base-content": "#ffffff",
+        },
+        green: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#52c41a",
+          "primary-focus": "#389e0d",
+          "primary-content": "#ffffff",
+        },
+        purple: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#722ed1",
+          "primary-focus": "#531dab",
+          "primary-content": "#ffffff",
+        },
+        orange: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#fa8c16",
+          "primary-focus": "#d46b08",
+          "primary-content": "#ffffff",
+        },
+        red: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#f5222d",
+          "primary-focus": "#cf1322",
+          "primary-content": "#ffffff",
+        },
+        cyan: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#13c2c2",
+          "primary-focus": "#08979c",
+          "primary-content": "#ffffff",
+        },
+        pink: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#eb2f96",
+          "primary-focus": "#c41d7f",
+          "primary-content": "#ffffff",
+        },
+        blue: {
+          ...require("daisyui/src/theming/themes")["light"],
+          primary: "#2f54eb",
+          "primary-focus": "#1d39c4",
+          "primary-content": "#ffffff",
         }
       }
     ],
-    darkTheme: "dark", // 系统暗色模式使用的主题
-    base: true, // 应用基础样式
-    styled: true, // 使用 daisyUI 的组件样式
-    utils: true, // 启用工具类
-    logs: false, // 关闭日志输出
-    themeRoot: ":root", // 主题 CSS 变量的根元素
+    darkTheme: "dark",
+    base: true,
+    styled: true,
+    utils: true,
+    logs: false,
+    themeRoot: ":root",
   }
 } 

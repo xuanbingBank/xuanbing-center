@@ -88,8 +88,8 @@
             v-for="color in themeColors" 
             :key="color.name"
             class="theme-color-item cursor-pointer rounded-lg overflow-hidden border border-base-300 transition-all"
-            :class="{ 'ring-2 ring-offset-2': selectedColor === color.name }"
-            @click="selectedColor = color.name"
+            :class="{ 'ring-2 ring-offset-2 ring-primary': selectedColor === color.name }"
+            @click="handleColorSelect(color)"
           >
             <!-- 预览窗口 -->
             <div class="preview-window">
@@ -164,7 +164,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useThemeStore } from '@/stores/modules/theme'
 import type { ThemeMode } from '@/stores/modules/theme'
 
@@ -183,21 +183,41 @@ const themeModes = [
  * @description 主题颜色选项
  */
 const themeColors = [
-  { name: 'default', label: '默认蓝', value: '#1890ff' },
-  { name: 'green', label: '清新绿', value: '#52c41a' },
-  { name: 'purple', label: '典雅紫', value: '#722ed1' },
-  { name: 'orange', label: '活力橙', value: '#fa8c16' },
-  { name: 'red', label: '中国红', value: '#f5222d' },
-  { name: 'cyan', label: '清爽青', value: '#13c2c2' },
-  { name: 'pink', label: '浪漫粉', value: '#eb2f96' },
-  { name: 'blue', label: '科技蓝', value: '#2f54eb' }
+  { name: 'light', label: '默认蓝', value: '#1890ff', darkValue: '#177ddc' },
+  { name: 'green', label: '清新绿', value: '#52c41a', darkValue: '#49aa19' },
+  { name: 'purple', label: '典雅紫', value: '#722ed1', darkValue: '#642ab5' },
+  { name: 'orange', label: '活力橙', value: '#fa8c16', darkValue: '#d87a16' },
+  { name: 'red', label: '中国红', value: '#f5222d', darkValue: '#dc3545' },
+  { name: 'cyan', label: '清爽青', value: '#13c2c2', darkValue: '#08979c' },
+  { name: 'pink', label: '浪漫粉', value: '#eb2f96', darkValue: '#c41d7f' },
+  { name: 'blue', label: '科技蓝', value: '#2f54eb', darkValue: '#1d39c4' }
 ]
 
-const selectedColor = ref('default')
+const selectedColor = ref(themeStore.currentTheme)
 
 // 处理模式切换
 function handleModeChange(value: ThemeMode) {
   themeStore.setMode(value)
+}
+
+// 处理主题色调切换
+function handleColorChange(themeName: string) {
+  selectedColor.value = themeName
+  themeStore.setTheme(themeName)
+}
+
+// 监听主题模式变化，自动切换对应的主题色调
+watch(() => themeStore.mode, (newMode) => {
+  if (newMode === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark')
+  } else {
+    document.documentElement.setAttribute('data-theme', selectedColor.value)
+  }
+}, { immediate: true })
+
+// 点击颜色卡片时触发主题切换
+function handleColorSelect(color: typeof themeColors[number]) {
+  handleColorChange(color.name)
 }
 </script>
 

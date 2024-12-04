@@ -6,12 +6,7 @@ export type ThemeMode = 'light' | 'dark' | 'system'
 export const useThemeStore = defineStore('theme', () => {
   const mode = ref<ThemeMode>(localStorage.getItem('theme-mode') as ThemeMode || 'system')
 
-  const currentTheme = computed(() => {
-    if (mode.value === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return mode.value
-  })
+  const currentTheme = ref('light')
 
   function setMode(newMode: ThemeMode) {
     mode.value = newMode
@@ -30,10 +25,30 @@ export const useThemeStore = defineStore('theme', () => {
     updateTheme()
   }
 
+  function setTheme(theme: string) {
+    currentTheme.value = theme
+    if (mode.value !== 'dark') {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+    localStorage.setItem('theme', theme)
+  }
+
+  function initTheme() {
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      currentTheme.value = savedTheme
+      if (mode.value !== 'dark') {
+        document.documentElement.setAttribute('data-theme', savedTheme)
+      }
+    }
+  }
+
   return {
     mode,
     currentTheme,
     setMode,
-    initSystemThemeListener
+    initSystemThemeListener,
+    setTheme,
+    initTheme
   }
 }) 
