@@ -4,7 +4,7 @@
 <template>
   <div class="flex flex-col flex-1 min-w-0">
     <!-- 主要内容区 -->
-    <main class="flex-1 overflow-auto bg-base-150 p-6">
+    <main class="flex-1 overflow-auto bg-base-200 p-6 transition-colors duration-300">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
@@ -13,7 +13,7 @@
     </main>
 
     <!-- 底栏 -->
-    <footer class="h-[50px] flex items-center justify-center bg-base-100 border-t border-base-300">
+    <footer class="h-[50px] flex items-center justify-center bg-base-100 border-t border-base-content/10 transition-colors duration-300">
       <div class="text-base-content/60 text-sm">
         © 2024 XuanBing Center. All rights reserved.
       </div>

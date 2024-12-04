@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col bg-base-100" :class="{ 'dark': isDark }">
+  <div class="h-screen flex flex-col bg-base-100 transition-colors duration-300" :class="{ 'dark': isDark }">
     <!-- 顶栏 -->
     <app-header />
 
