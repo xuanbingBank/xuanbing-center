@@ -9,23 +9,7 @@
       <side-menu />
 
       <!-- 右侧内容区 -->
-      <div class="flex flex-col flex-1 min-w-0">
-        <!-- 主要内容区 -->
-        <main class="flex-1 overflow-auto bg-base-150 p-6">
-          <router-view v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-              <component :is="Component" />
-            </transition>
-          </router-view>
-        </main>
-
-        <!-- 底栏 -->
-        <footer class="h-[50px] flex items-center justify-center bg-base-100 border-t border-base-300">
-          <div class="text-base-content/60 text-sm">
-            © 2024 XuanBing Center. All rights reserved.
-          </div>
-        </footer>
-      </div>
+      <main-content />
     </div>
   </div>
 </template>
@@ -34,6 +18,7 @@
 import { useDark } from '@vueuse/core'
 import SideMenu from './layouts/SideMenu.vue'
 import AppHeader from './layouts/AppHeader.vue'
+import MainContent from './layouts/MainContent.vue'
 
 const isDark = useDark()
 </script>
