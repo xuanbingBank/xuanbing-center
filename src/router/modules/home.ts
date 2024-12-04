@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from 'vue-router'
-import { loadView } from '../../utils/router'
 
 export const homeRoute: RouteRecordRaw = {
   path: '/home',
@@ -13,7 +12,7 @@ export const homeRoute: RouteRecordRaw = {
     {
       path: '/home/dashboard',
       name: 'dashboard',
-      component: loadView('home/dashboard/index'),
+      component: () => import('../../views/home/dashboard/index.vue'),
       meta: {
         title: '数据看板',
         icon: 'house',
@@ -27,7 +26,7 @@ export const homeRoute: RouteRecordRaw = {
     {
       path: '/home/game-screen',
       name: 'gameScreen',
-      component: loadView('home/game-screen/index'),
+      component: () => import('../../views/home/game-screen/index.vue'),
       meta: {
         title: '游戏副屏',
         icon: 'display',

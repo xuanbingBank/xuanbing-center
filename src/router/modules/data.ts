@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from 'vue-router'
-import { loadView } from '../../utils/router'
 
 
 export const dataRoute: RouteRecordRaw = {
@@ -14,7 +13,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/notes',
       name: 'notes',
-      component: loadView('data/notes/index'),
+      component: () => import('../../views/data/notes/index.vue'),
       meta: {
         title: '笔记',
         icon: 'file'
@@ -23,7 +22,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/materials',
       name: 'materials',
-      component: loadView('data/materials/index'),
+      component: () => import('../../views/data/materials/index.vue'),
       meta: {
         title: '素材库',
         icon: 'box-archive'
@@ -32,7 +31,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/bookmarks',
       name: 'bookmarks',
-      component: loadView('data/bookmarks/index'),
+      component: () => import('../../views/data/bookmarks/index.vue'),
       meta: {
         title: '网址收藏',
         icon: 'link'
@@ -41,7 +40,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/music',
       name: 'music',
-      component: loadView('data/music/index'),
+      component: () => import('../../views/data/music/index.vue'),
       meta: {
         title: '音乐库',
         icon: 'headphones'
@@ -50,7 +49,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/videos',
       name: 'videos',
-      component: loadView('data/videos/index'),
+      component: () => import('../../views/data/videos/index.vue'),
       meta: {
         title: '视频库',
         icon: 'video'
@@ -59,7 +58,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/codes',
       name: 'codes',
-      component: loadView('data/codes/index'),
+      component: () => import('../../views/data/codes/index.vue'),
       meta: {
         title: '代码库',
         icon: 'code'
@@ -68,7 +67,7 @@ export const dataRoute: RouteRecordRaw = {
     {
       path: '/data/others',
       name: 'others',
-      component: loadView('data/others/index'),
+      component: () => import('../../views/data/others/index.vue'),
       meta: {
         title: '其他',
         icon: 'folder'

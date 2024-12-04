@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from 'vue-router'
-import { loadView } from '../../utils/router'
 
 export const aboutRoute: RouteRecordRaw = {
   path: '/about',
@@ -13,7 +12,7 @@ export const aboutRoute: RouteRecordRaw = {
     {
       path: '/about/feedback',
       name: 'feedback',
-      component: loadView('about/feedback/index'),
+      component: () => import('../../views/about/feedback/index.vue'),
       meta: {
         title: '反馈',
         icon: 'comments'

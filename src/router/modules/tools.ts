@@ -1,5 +1,4 @@
 import { RouteRecordRaw } from 'vue-router'
-import { loadView } from '../../utils/router'
 
 export const toolsRoute: RouteRecordRaw = {
   path: '/tools',
@@ -13,7 +12,7 @@ export const toolsRoute: RouteRecordRaw = {
     {
       path: '/tools/features',
       name: 'toolFeatures',
-      component: loadView('tools/features/index'),
+      component: () => import('../../views/tools/features/index.vue'),
       meta: {
         title: '小功能组',
         icon: 'wrench'
