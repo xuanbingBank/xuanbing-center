@@ -1,14 +1,7 @@
 <template>
   <header class="h-[50px] flex items-center justify-between bg-base-100 border-b border-base-300 webkit-app-region-drag transition-[background-color,border-color,color] duration-300">
-    <!-- Logo -->
-    <div class="px-6 flex-1 flex items-center gap-2">
-      <img 
-        src="@/assets/logo/logo.png" 
-        alt="XuanBing Center Logo" 
-        class="h-[30px] w-[30px] object-contain"
-      />
-      <span class="text-xl font-bold text-base-content">XuanBing Center</span>
-    </div>
+    <!-- 移除 Logo 部分，保留空白区域用于拖拽 -->
+    <div class="flex-1"></div>
 
     <!-- Window Controls -->
     <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
