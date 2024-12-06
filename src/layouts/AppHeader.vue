@@ -7,15 +7,15 @@
     <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
       <!-- Minimize -->
       <button 
-        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200"
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
         @click="minimizeWindow"
       >
-        <font-awesome-icon icon="window-minimize" />
+        <font-awesome-icon icon="window-minimize" class="translate-y-[-4px]" />
       </button>
 
       <!-- Maximize -->
       <button 
-        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200"
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
         @click="toggleMaximize"
       >
         <font-awesome-icon icon="window-maximize" />
@@ -23,7 +23,7 @@
 
       <!-- Close -->
       <button 
-        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-error"
+        class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-error flex items-center justify-center"
         @click="closeWindow"
       >
         <font-awesome-icon icon="xmark" />
