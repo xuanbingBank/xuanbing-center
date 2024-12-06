@@ -1,14 +1,14 @@
 <template>
-  <div class="h-screen flex flex-col bg-base-100 transition-colors duration-300" :class="{ 'dark': isDark }">
-    <!-- 顶栏 -->
-    <app-header />
+  <div class="h-screen flex bg-base-100 transition-colors duration-300" :class="{ 'dark': isDark }">
+    <!-- 左侧菜单 -->
+    <side-menu />
 
-    <!-- 主体内容区 -->
-    <div class="flex flex-1 h-[calc(100vh-50px)] overflow-hidden">
-      <!-- 侧边栏 -->
-      <side-menu />
+    <!-- 右侧内容区域 -->
+    <div class="flex flex-col flex-1">
+      <!-- 顶栏 -->
+      <app-header />
 
-      <!-- 右侧内容区 -->
+      <!-- 主体内容区 -->
       <main-content />
     </div>
   </div>

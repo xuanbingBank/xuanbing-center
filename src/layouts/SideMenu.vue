@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full border-r border-base-content/10">
     <!-- Logo -->
     <div class="flex h-[50px] border-b border-base-content/10">
       <div class="w-[40px] flex-shrink-0 flex items-center justify-center">
@@ -63,8 +63,7 @@
 
       <!-- 二级菜单 -->
       <div 
-        class="bg-base-100 border-r border-base-content/10 relative overflow-hidden
-               transition-all duration-300"
+        class="bg-base-100 relative overflow-hidden transition-all duration-300"
         :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
       >
         <ul class="menu menu-sm p-0"
