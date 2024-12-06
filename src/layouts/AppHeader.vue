@@ -1,26 +1,32 @@
 <template>
   <header class="h-[50px] flex items-center justify-between bg-base-100 border-b border-base-300 webkit-app-region-drag transition-[background-color,border-color,color] duration-300">
     <!-- 面包屑 -->
-    <div class="flex-1 flex items-center px-4 webkit-app-region-no-drag">
-      <div class="breadcrumbs text-sm">
-        <ul>
+    <div class="min-w-[200px] max-w-[400px] flex items-center px-4 webkit-app-region-no-drag">
+      <div class="breadcrumbs text-sm w-full">
+        <ul class="w-full">
           <li v-for="(crumb, index) in breadcrumbs" :key="index">
             <a 
-              class="flex items-center gap-1 text-base-content/70 hover:text-base-content"
-              :class="{ '!text-base-content': index === breadcrumbs.length - 1 }"
-              @click.prevent="handleCrumbClick(crumb.path)"
+              class="flex items-center gap-1 text-base-content/70"
+              :class="[
+                { '!text-base-content': index === breadcrumbs.length - 1 },
+                { 'hover:text-base-content cursor-pointer': crumb.clickable !== false }
+              ]"
+              @click.prevent="crumb.clickable !== false && handleCrumbClick(crumb.path)"
             >
               <font-awesome-icon
                 v-if="crumb.icon"
                 :icon="['fas', crumb.icon]"
-                class="text-xs"
+                class="text-xs flex-shrink-0"
               />
-              <span>{{ crumb.title }}</span>
+              <span class="truncate">{{ crumb.title }}</span>
             </a>
           </li>
         </ul>
       </div>
     </div>
+
+    <!-- 可拖拽区域 -->
+    <div class="flex-1 h-full"></div>
 
     <!-- Window Controls -->
     <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
@@ -75,9 +81,21 @@ const breadcrumbs = computed(() => {
       crumbs.push({
         title: matchedRoute.meta.title,
         path: currentPath,
-        icon: matchedRoute.meta.icon as string
+        icon: matchedRoute.meta.icon as string,
+        // 如果是一级菜单（路径只有一段），则设置为不可点击
+        clickable: pathSegments.length > 1 && currentPath.split('/').filter(Boolean).length > 1
       })
     }
+  }
+
+  // 如果没有面包屑，则显示默认的数据看板
+  if (crumbs.length === 0) {
+    return [{
+      title: '数据看板',
+      path: '/home/dashboard',
+      icon: 'house',
+      clickable: true
+    }]
   }
 
   return crumbs
