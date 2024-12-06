@@ -37,26 +37,27 @@
 <style scoped lang="postcss">
 .menu-item {
   @apply flex items-center h-[36px] px-3
-         hover:bg-base-200
-         transition-all duration-300
+         hover:bg-base-200/50
          text-base-content/70 hover:text-base-content
-         relative;
+         relative
+         transition-[background-color,color] duration-300;
+}
 
-  &, & * {
-    @apply transition-all duration-300;
-  }
+.menu-item * {
+  @apply transition-[color] duration-300;
 }
 
 .menu-item.active {
   @apply !bg-primary !text-primary-content;
+}
 
-  &, & * {
-    @apply !text-primary-content transition-colors duration-300;
-  }
+.menu-item.active,
+.menu-item.active * {
+  @apply !text-primary-content;
+}
 
-  &:hover {
-    @apply !bg-primary/90;
-  }
+.menu-item.active:hover {
+  @apply !bg-primary/90;
 }
 
 .menu-item.active:before {
