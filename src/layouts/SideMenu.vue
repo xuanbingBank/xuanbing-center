@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full border-r border-base-content/10">
     <!-- Logo -->
     <div class="flex h-[50px] border-b border-base-content/10">
-      <div class="w-[40px] flex-shrink-0 flex items-center justify-center">
+      <div class="w-[32px] flex-shrink-0 flex items-center justify-center">
         <img 
           src="@/assets/logo/logo.png" 
           alt="XuanBing Center Logo" 
@@ -11,7 +11,7 @@
       </div>
       <div 
         class="flex-1 flex items-center px-2 transition-all duration-300"
-        :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
+        :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
       >
         <span class="text-sm font-medium text-base-content whitespace-nowrap transition-opacity duration-300"
               :class="{ 'opacity-0': isCollapsed }">
@@ -23,13 +23,13 @@
     <!-- 菜单容器 -->
     <div class="flex flex-1 min-h-0" ref="menuContainerRef">
       <!-- 一级菜单 -->
-      <div class="w-[40px] flex-shrink-0 bg-base-100 border-r border-base-content/10 transition-all duration-300">
+      <div class="w-[32px] flex-shrink-0 bg-base-100 border-r border-base-content/10 transition-all duration-300">
         <div class="flex flex-col h-full justify-between">
           <!-- 顶部菜单 -->
-          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300 flex-1">
-            <li v-for="route in topMenus" :key="route.name" class="my-1">
+          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300 flex-1 w-[32px]">
+            <li v-for="route in topMenus" :key="route.name" class="my-1 w-full">
               <a
-                class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
+                class="w-full h-[32px] flex items-center justify-center rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
                 :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
@@ -43,10 +43,10 @@
           </ul>
 
           <!-- 底部菜单 -->
-          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300">
-            <li v-for="route in bottomMenus" :key="route.name">
+          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300 w-[32px]">
+            <li v-for="route in bottomMenus" :key="route.name" class="w-full">
               <a
-                class="rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
+                class="w-full h-[32px] flex items-center justify-center rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
                 :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
@@ -64,10 +64,10 @@
       <!-- 二级菜单 -->
       <div 
         class="bg-base-100 relative overflow-hidden transition-all duration-300"
-        :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
+        :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
       >
         <ul class="menu menu-sm p-0"
-            :class="[isCollapsed ? 'w-[40px]' : 'w-[150px]']"
+            :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
         >
           <template v-if="currentModuleRoute?.children">
             <recursive-menu-item

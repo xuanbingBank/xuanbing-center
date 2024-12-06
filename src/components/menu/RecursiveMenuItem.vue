@@ -1,46 +1,42 @@
 <template>
-  <li>
-    <a
+  <li class="my-1">
+    <a 
       class="menu-item"
       :class="[
         { 'active': isActive },
-        isCollapsed ? 'justify-center w-[40px] p-0' : 'px-4'
+        { 'justify-center': isCollapsed }
       ]"
       @click="handleClick"
     >
       <font-awesome-icon
-        v-if="props.menuItem.meta?.icon"
-        :icon="['fas', props.menuItem.meta.icon as string]"
-        class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ '!text-primary-content': isActive }"
+        v-if="menuItem.meta?.icon"
+        :icon="['fas', menuItem.meta.icon as string]"
+        class="text-sm"
       />
       <span 
         v-if="!isCollapsed"
-        class="text-sm transition-all duration-300 text-base-content/70 group-hover:text-base-content"
-        :class="{ '!text-primary-content': isActive }"
+        class="ml-2"
       >
-        {{ props.menuItem.meta?.title }}
+        {{ menuItem.meta?.title }}
       </span>
     </a>
 
-    <ul v-if="props.menuItem.children?.length" 
-        class="menu menu-compact"
-        :class="{ 'hidden': isCollapsed }">
+    <template v-if="menuItem.children && !isCollapsed">
       <recursive-menu-item
-        v-for="child in props.menuItem.children"
+        v-for="child in menuItem.children"
         :key="child.path"
         :menu-item="child"
         :is-active="isActive"
         :is-collapsed="isCollapsed"
         @select="handleSelect"
       />
-    </ul>
+    </template>
   </li>
 </template>
 
 <style scoped lang="postcss">
 .menu-item {
-  @apply flex items-center h-[36px] 
+  @apply flex items-center h-[36px] px-3
          hover:bg-base-200
          transition-all duration-300
          text-base-content/70 hover:text-base-content
