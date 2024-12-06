@@ -26,34 +26,34 @@
       <div class="w-[32px] flex-shrink-0 bg-base-100 border-r border-base-content/10 transition-all duration-300">
         <div class="flex flex-col h-full justify-between">
           <!-- 顶部菜单 -->
-          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300 flex-1 w-[32px]">
+          <ul class="menu menu-sm bg-base-100 p-0 w-[32px]">
             <li v-for="route in topMenus" :key="route.name" class="my-1 w-full">
               <a
-                class="w-full h-[32px] flex items-center justify-center rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
-                :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
+                class="w-full h-[32px] flex items-center justify-center rounded-none text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
                 <font-awesome-icon
                   v-if="route.meta?.icon"
                   :icon="['fas', route.meta.icon as string]"
-                  class="text-sm transition-all duration-300"
+                  class="text-sm"
                 />
               </a>
             </li>
           </ul>
 
           <!-- 底部菜单 -->
-          <ul class="menu menu-sm bg-base-100 p-0 transition-all duration-300 w-[32px]">
+          <ul class="menu menu-sm bg-base-100 p-0 w-[32px]">
             <li v-for="route in bottomMenus" :key="route.name" class="w-full">
               <a
-                class="w-full h-[32px] flex items-center justify-center rounded-none transition-all duration-300 text-base-content/70 hover:text-base-content hover:bg-base-200"
-                :class="{ 'active !bg-primary text-primary-content hover:text-primary-content': activeModule === route.meta?.module }"
+                class="w-full h-[32px] flex items-center justify-center rounded-none text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
                 <font-awesome-icon
                   v-if="route.meta?.icon"
                   :icon="['fas', route.meta.icon as string]"
-                  class="text-sm transition-all duration-300"
+                  class="text-sm"
                 />
               </a>
             </li>

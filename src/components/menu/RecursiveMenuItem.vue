@@ -40,11 +40,11 @@
          hover:bg-base-200/50
          text-base-content/70 hover:text-base-content
          relative
-         transition-[background-color,color] duration-300;
+         transition-[background-color] duration-200;
 }
 
 .menu-item * {
-  @apply transition-[color] duration-300;
+  @apply transition-none;
 }
 
 .menu-item.active {
