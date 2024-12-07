@@ -1,4 +1,6 @@
-<img src="https://github.com/xuanbingBank/xuanbing-center/blob/ce4d63c40f0c33f7d036c335dd1169f0f26e0296/public/icon.png" alt="logo" width="100" height="100"/>
+<div align="center">
+  <img src="https://github.com/xuanbingBank/xuanbing-center/blob/ce4d63c40f0c33f7d036c335dd1169f0f26e0296/public/icon.png" alt="logo" width="100" height="100"/>
+</div>
 <h1 align="center">xuanbing-center</h1>
 <div align="center">
   <p>一个基于 Electron + Vue3 的个人工作台应用</p>
