@@ -3,7 +3,6 @@
  */
 import { Router, RouteLocationNormalized } from 'vue-router'
 import { useAppStore } from '../../stores/modules/app'
-import { ElMessage } from 'element-plus'
 import type { RouteMeta } from '../../types/menu'
 
 /**
@@ -81,6 +80,5 @@ export function setupRouterGuards(router: Router) {
   /** 错误处理 */
   router.onError(error => {
     console.error('路由错误:', error)
-    ElMessage.error('页面加载失败')
   })
 }

@@ -10,13 +10,11 @@
     "format": "prettier --write \"src/**/*.{vue,ts,tsx,js,jsx,css,less}\""
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
     "@vueuse/core": "^10.7.0",
     "@vueuse/electron": "^10.7.0",
     "better-sqlite3": "^11.6.0",
     "electron": "^28.0.0",
     "electron-builder": "^24.9.1",
-    "element-plus": "^2.4.0",
     "pinia": "^2.2.6",
     "typescript": "^5.7.2",
     "vue": "^3.3.0",
