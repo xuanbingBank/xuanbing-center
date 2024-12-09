@@ -28,7 +28,10 @@ import {
   faSun,
   faMoon,
   faDesktop,
-  faFolderTree
+  faFolderTree,
+  faFolderOpen,
+  faClock,
+  faStar
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
@@ -57,7 +60,10 @@ library.add(
   faSun,
   faMoon,
   faDesktop,
-  faFolderTree
+  faFolderTree,
+  faFolderOpen,
+  faClock,
+  faStar
 )
 
 export { FontAwesomeIcon } 
