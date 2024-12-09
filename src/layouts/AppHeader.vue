@@ -1,7 +1,7 @@
 <template>
   <header class="flex flex-col bg-base-100 border-b border-base-300 transition-[background-color,border-color,color] duration-300">
-    <!-- 顶部区域 -->
-    <div class="h-[50px] flex items-center justify-between webkit-app-region-drag">
+    <!-- 顶部区域 - 调整高度为32px -->
+    <div class="h-[32px] flex items-center justify-between webkit-app-region-drag">
       <!-- 面包屑 -->
       <div class="min-w-[200px] max-w-[400px] flex items-center px-4 webkit-app-region-no-drag">
         <div class="breadcrumbs text-sm w-full">
@@ -30,19 +30,19 @@
       <!-- 可拖拽区域 -->
       <div class="flex-1 h-full"></div>
 
-      <!-- Window Controls -->
+      <!-- Window Controls - 调整按钮高度 -->
       <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
         <!-- Minimize -->
         <button 
-          class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
+          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
           @click="minimizeWindow"
         >
-          <font-awesome-icon icon="window-minimize" class="translate-y-[-4px]" />
+          <font-awesome-icon icon="window-minimize" class="translate-y-[-2px]" />
         </button>
 
         <!-- Maximize -->
         <button 
-          class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
+          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
           @click="toggleMaximize"
         >
           <font-awesome-icon icon="window-maximize" />
@@ -50,7 +50,7 @@
 
         <!-- Close -->
         <button 
-          class="btn btn-ghost btn-sm h-[50px] w-[50px] min-h-0 rounded-none hover:bg-error flex items-center justify-center"
+          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-error flex items-center justify-center"
           @click="closeWindow"
         >
           <font-awesome-icon icon="xmark" />
@@ -59,12 +59,12 @@
     </div>
 
     <!-- 页签区域 -->
-    <div class="h-[36px] flex items-center px-2 webkit-app-region-no-drag">
-      <div class="tabs tabs-boxed bg-base-200/50 h-[32px]">
+    <div class="h-[32px] flex items-center px-2 webkit-app-region-no-drag">
+      <div class="tabs h-[28px] flex gap-1">
         <a
           v-for="tab in openedTabs"
           :key="tab.path"
-          class="tab h-[32px] min-h-[32px] gap-2 px-4"
+          class="tab h-[28px] min-h-[28px] gap-2 px-3 rounded-md bg-base-200/30"
           :class="{ 'tab-active': tab.path === route.path }"
           @click="handleTabClick(tab.path)"
         >
@@ -73,7 +73,7 @@
             :icon="['fas', tab.icon]"
             class="text-xs"
           />
-          <span>{{ tab.title }}</span>
+          <span class="text-sm">{{ tab.title }}</span>
           <font-awesome-icon
             icon="xmark"
             class="text-xs opacity-0 group-hover:opacity-100 hover:text-error"
@@ -240,16 +240,40 @@ const closeWindow = () => {
   @apply !text-base-content/60 !mx-2;
 }
 
-/* 页签样式 */
-.tabs .tab {
+/* 页签容器样式 */
+.tabs {
   @apply transition-colors duration-200;
+  min-width: min-content;
 }
 
-.tabs .tab-active {
-  @apply !bg-primary text-primary-content;
+.tab {
+  @apply flex items-center transition-colors duration-200
+         text-base-content/70 hover:text-base-content
+         hover:bg-base-200/50;
+  min-width: 100px;
+  max-width: 200px;
 }
 
+/* 激活状态的标签样式 */
+.tab.tab-active {
+  @apply !bg-primary/20 !text-primary;
+}
+
+.tab.tab-active:hover {
+  @apply !bg-primary/30;
+}
+
+/* 关闭按钮样式 */
 .tab:hover .opacity-0 {
   @apply opacity-100;
+}
+
+.tab span {
+  @apply truncate;
+}
+
+/* 滚动按钮样式 */
+.btn-ghost {
+  @apply hover:bg-base-200;
 }
 </style> 
