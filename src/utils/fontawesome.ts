@@ -27,7 +27,8 @@ import {
   faSliders,
   faSun,
   faMoon,
-  faDesktop
+  faDesktop,
+  faFolderTree
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
@@ -55,7 +56,8 @@ library.add(
   faSliders,
   faSun,
   faMoon,
-  faDesktop
+  faDesktop,
+  faFolderTree
 )
 
 export { FontAwesomeIcon } 

@@ -5,7 +5,7 @@ export const filesRoute: RouteRecordRaw = {
   name: 'files',
   meta: {
     title: '文件管理',
-    icon: 'folder',
+    icon: 'folder-tree',
     module: 'files'
   },
   children: [
