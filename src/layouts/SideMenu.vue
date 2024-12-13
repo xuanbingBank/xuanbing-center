@@ -27,9 +27,9 @@
         <div class="flex flex-col h-full justify-between">
           <!-- 顶部菜单 -->
           <ul class="menu menu-sm bg-base-100 p-0 w-[31px]">
-            <li v-for="route in topMenus" :key="route.name" class="my-1 w-full">
+            <li v-for="route in topMenus" :key="route.name" class="my-1 w-full px-1">
               <a
-                class="w-full h-[32px] flex items-center justify-center rounded-none text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                class="w-[24px] h-[24px] flex items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
                 :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
@@ -44,9 +44,9 @@
 
           <!-- 底部菜单 -->
           <ul class="menu menu-sm bg-base-100 p-0 w-[31px]">
-            <li v-for="route in bottomMenus" :key="route.name" class="w-full">
+            <li v-for="route in bottomMenus" :key="route.name" class="w-full px-1">
               <a
-                class="w-full h-[32px] flex items-center justify-center rounded-none text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                class="w-[24px] h-[24px] flex items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
                 :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
