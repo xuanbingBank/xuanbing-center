@@ -16,9 +16,9 @@
 
 <script lang="ts" setup>
 import { useDark } from '@vueuse/core'
-import SideMenu from './layouts/SideMenu.vue'
-import AppHeader from './layouts/AppHeader.vue'
-import MainContent from './layouts/MainContent.vue'
+import SideMenu from '@/layouts/SideMenu.vue'
+import AppHeader from '@/layouts/AppHeader.vue'
+import MainContent from '@/layouts/MainContent.vue'
 
 const isDark = useDark()
 </script>

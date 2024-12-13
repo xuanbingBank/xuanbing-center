@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* 头部标题卡片容器 */
+  .header-card {
+    @apply w-full px-6 py-4 
+           flex justify-between items-center
+           bg-base-100 
+           border-b border-base-content/10
+           transition-all duration-300;
+  }
+
+  /* 左侧区域：标题和面包屑 */
+  .header-card-left {
+    @apply flex items-center gap-3;
+  }
+
+  /* 标题文本 */
+  .header-card-title {
+    @apply text-lg font-bold text-base-content
+           flex items-center gap-2;
+  }
+
+  /* 标题图标 */
+  .header-card-icon {
+    @apply w-5 h-5 text-primary/80;
+  }
+
+  /* 副标题/描述文本 */
+  .header-card-subtitle {
+    @apply text-sm text-base-content/60;
+  }
+
+  /* 右侧区域：操作按钮等 */
+  .header-card-right {
+    @apply flex items-center gap-2;
+  }
+
+  /* 操作按钮 */
+  .header-card-action {
+    @apply btn btn-sm btn-ghost
+           hover:bg-base-200
+           transition-colors duration-200;
+  }
+}

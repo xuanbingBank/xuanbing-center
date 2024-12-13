@@ -1,11 +1,12 @@
 import './styles/variables.css'
 import './styles/global.css'
+import './styles/components.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import { useThemeStore } from './stores/modules/theme'
-import { Icon } from './utils/icons'
+import { Icon } from '@iconify/vue'
 
 const app = createApp(App)
 const pinia = createPinia()
