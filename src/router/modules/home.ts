@@ -12,7 +12,7 @@ export const homeRoute: RouteRecordRaw = {
     {
       path: '/home/dashboard',
       name: 'dashboard',
-      component: () => import('../../views/home/dashboard/index.vue'),
+      component: () => import('@/views/home/dashboard/index.vue'),
       meta: {
         title: '数据看板',
         icon: 'house',
@@ -26,7 +26,7 @@ export const homeRoute: RouteRecordRaw = {
     {
       path: '/home/game-screen',
       name: 'gameScreen',
-      component: () => import('../../views/home/game-screen/index.vue'),
+      component: () => import('@/views/home/game-screen/index.vue'),
       meta: {
         title: '游戏副屏',
         icon: 'display',

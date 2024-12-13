@@ -10,9 +10,9 @@ export const exampleRoute: RouteRecordRaw = {
   },
   children: [
     {
-      path: '/examples/daisyui',
+      path: '/daisyui',
       name: 'daisyui',
-      component: () => import('../../views/examples/daisyui/index.vue'),
+      component: () => import('@/views/examples/daisyui/index.vue'),
       meta: {
         title: 'daisyUI',
         icon: 'palette'

@@ -12,7 +12,7 @@ export const toolsRoute: RouteRecordRaw = {
     {
       path: '/tools/features',
       name: 'toolFeatures',
-      component: () => import('../../views/tools/features/index.vue'),
+      component: () => import('@/views/tools/features/index.vue'),
       meta: {
         title: '小功能组',
         icon: 'wrench'

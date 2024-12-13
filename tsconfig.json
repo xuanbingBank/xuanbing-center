@@ -23,7 +23,8 @@
     "src/**/*.d.ts", 
     "src/**/*.tsx", 
     "src/**/*.vue",
-    "electron/**/*.ts"
+    "electron/**/*.ts",
+    "vite.config.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 } 

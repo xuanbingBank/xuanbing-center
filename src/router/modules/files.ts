@@ -12,7 +12,7 @@ export const filesRoute: RouteRecordRaw = {
     {
       path: '/files/explorer',
       name: 'explorer',
-      component: () => import('../../views/files/explorer/index.vue'),
+      component: () => import('@/views/files/explorer/index.vue'),
       meta: {
         title: '文件浏览',
         icon: 'folder-open'
@@ -21,7 +21,7 @@ export const filesRoute: RouteRecordRaw = {
     {
       path: '/files/recent',
       name: 'recent',
-      component: () => import('../../views/files/recent/index.vue'),
+      component: () => import('@/views/files/recent/index.vue'),
       meta: {
         title: '最近文件',
         icon: 'clock'
@@ -30,7 +30,7 @@ export const filesRoute: RouteRecordRaw = {
     {
       path: '/files/favorites',
       name: 'favorites', 
-      component: () => import('../../views/files/favorites/index.vue'),
+      component: () => import('@/views/files/favorites/index.vue'),
       meta: {
         title: '收藏夹',
         icon: 'star'
