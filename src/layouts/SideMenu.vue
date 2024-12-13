@@ -35,7 +35,7 @@
               >
                 <font-awesome-icon
                   v-if="route.meta?.icon"
-                  :icon="['fas', route.meta.icon as string]"
+                  :icon="['fas', route.meta.icon]"
                   class="text-sm"
                 />
               </a>
@@ -52,7 +52,7 @@
               >
                 <font-awesome-icon
                   v-if="route.meta?.icon"
-                  :icon="['fas', route.meta.icon as string]"
+                  :icon="['fas', route.meta.icon]"
                   class="text-sm"
                 />
               </a>
@@ -70,15 +70,54 @@
             :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
         >
           <template v-if="currentModuleRoute?.children">
-            <recursive-menu-item
-              v-for="route in currentModuleRoute.children"
-              class="px-3"
-              :key="route.path"
-              :menu-item="route"
-              :is-active="activeRoute === route.path"
-              :is-collapsed="isCollapsed"
-              @select="handleSelect"
-            />
+            <li v-for="route in currentModuleRoute.children" 
+                :key="route.path"
+                class="my-1 px-3"
+            >
+              <a 
+                class="menu-item"
+                :class="[
+                  { 'active': activeRoute === route.path },
+                  { 'justify-center': isCollapsed }
+                ]"
+                @click="handleSelect(route.path)"
+              >
+                <font-awesome-icon
+                  v-if="route.meta?.icon"
+                  :icon="['fas', route.meta.icon]"
+                  class="text-sm"
+                />
+                <span 
+                  v-if="!isCollapsed"
+                  class="ml-2"
+                >
+                  {{ route.meta?.title }}
+                </span>
+              </a>
+
+              <!-- 递归渲染子菜单 -->
+              <template v-if="route.children && !isCollapsed">
+                <ul class="menu menu-sm pl-4">
+                  <li v-for="child in route.children" 
+                      :key="child.path"
+                      class="my-1"
+                  >
+                    <a 
+                      class="menu-item"
+                      :class="{ 'active': activeRoute === child.path }"
+                      @click="handleSelect(child.path)"
+                    >
+                      <font-awesome-icon
+                        v-if="child.meta?.icon"
+                        :icon="['fas', child.meta.icon]"
+                        class="text-sm"
+                      />
+                      <span class="ml-2">{{ child.meta?.title }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </template>
+            </li>
           </template>
         </ul>
 
@@ -110,7 +149,6 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue'
 import { FontAwesomeIcon } from '@/utils/fontawesome'
-import RecursiveMenuItem from '@/components/menu/RecursiveMenuItem.vue'
 import { useMenu } from '@/hooks/useMenu'
 
 const {
@@ -130,3 +168,38 @@ onMounted(() => {
   initActiveMenu()
 })
 </script>
+
+<style scoped lang="postcss">
+.menu-item {
+  @apply flex items-center h-[36px] px-3
+         hover:bg-base-200/50
+         text-base-content/70 hover:text-base-content
+         relative
+         transition-[background-color] duration-200;
+}
+
+.menu-item * {
+  @apply transition-none;
+}
+
+.menu-item.active {
+  @apply !bg-primary !text-primary-content;
+}
+
+.menu-item.active,
+.menu-item.active * {
+  @apply !text-primary-content;
+}
+
+.menu-item.active:hover {
+  @apply !bg-primary/90;
+}
+
+.menu-item.active:before {
+  @apply hidden;
+}
+
+.menu-item.active.justify-center:before {
+  @apply w-0;
+}
+</style>
