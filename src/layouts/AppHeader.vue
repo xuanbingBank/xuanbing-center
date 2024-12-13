@@ -1,5 +1,7 @@
 <template>
-  <header class="flex flex-col bg-base-100 border-b border-base-300 transition-[background-color,border-color,color] duration-300">
+  <header
+    class="flex flex-col bg-base-100 border-b border-base-300 transition-[background-color,border-color,color] duration-300"
+  >
     <!-- 顶部区域 -->
     <div class="h-[32px] flex items-center justify-between webkit-app-region-drag">
       <!-- 可拖拽区域 -->
@@ -8,34 +10,20 @@
       <!-- Window Controls -->
       <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
         <!-- Minimize -->
-        <button 
-          class="btn btn-sm hover:bg-base-200"
-          @click="minimizeWindow"
-        >
-          <Icon 
-            icon="material-symbols:minimize" 
-            class="w-[16px] h-[16px]"
-          />
+        <button class="btn btn-sm hover:bg-base-200" @click="minimizeWindow">
+          <Icon icon="material-symbols:minimize" class="w-[16px] h-[16px]" />
         </button>
 
         <!-- Maximize -->
-        <button 
-          class="btn btn-sm hover:bg-base-200"
-          @click="toggleMaximize"
-        >
-          <Icon 
-            icon="material-symbols:fullscreen" 
-          />
-        </button>
+        <label class="swap btn btn-sm hover:bg-base-200">
+          <input @click="toggleMaximize" type="checkbox" />
+          <Icon class="swap-off fill-current" icon="material-symbols:fullscreen" />
+          <Icon class="swap-on fill-current" icon="material-symbols:fullscreen-exit" />
+        </label>
 
         <!-- Close -->
-        <button 
-          class="btn btn-sm hover:bg-error"
-          @click="closeWindow"
-        >
-          <Icon 
-            icon="material-symbols:close" 
-          />
+        <button class="btn btn-sm hover:bg-error" @click="closeWindow">
+          <Icon icon="material-symbols:close" />
         </button>
       </div>
     </div>
@@ -55,7 +43,7 @@ declare global {
   }
 }
 
-let isMaximized = false;
+let isMaximized = false
 
 /**
  * @description 最小化窗口
@@ -95,4 +83,4 @@ const closeWindow = () => {
 .btn-ghost {
   @apply hover:bg-base-200;
 }
-</style> 
+</style>
