@@ -23,9 +23,6 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.1",
-    "@fortawesome/free-solid-svg-icons": "^6.7.1",
-    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^20.17.8",
     "@typescript-eslint/eslint-plugin": "^8.16.0",
