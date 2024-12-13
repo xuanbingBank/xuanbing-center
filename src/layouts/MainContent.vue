@@ -11,13 +11,6 @@
         </transition>
       </router-view>
     </main>
-
-    <!-- 底栏 -->
-    <footer class="h-[50px] flex items-center justify-center bg-base-100 border-t border-base-content/10 transition-colors duration-300">
-      <div class="text-base-content/60 text-sm">
-        © 2024 XuanBing Center. All rights reserved.
-      </div>
-    </footer>
   </div>
 </template>
 

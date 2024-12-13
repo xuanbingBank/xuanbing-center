@@ -12,7 +12,7 @@
           class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
           @click="minimizeWindow"
         >
-          <font-awesome-icon icon="window-minimize" class="translate-y-[-2px]" />
+          <font-awesome-icon icon="window-minimize" class="translate-y-[-5px]" />
         </button>
 
         <!-- Maximize -->

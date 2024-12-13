@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full border-r border-base-content/10">
     <!-- Logo -->
-    <div class="flex h-[50px] border-b border-base-content/10">
+    <div class="flex h-[33px] border-b border-base-content/10">
       <div class="w-[32px] flex-shrink-0 flex items-center justify-center">
         <img 
           src="@/assets/logo/logo.png" 
