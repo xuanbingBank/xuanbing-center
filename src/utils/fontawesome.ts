@@ -31,7 +31,8 @@ import {
   faFolderTree,
   faFolderOpen,
   faClock,
-  faStar
+  faStar,
+  faFlask
 } from '@fortawesome/free-solid-svg-icons'
 
 // 添加图标到库中
@@ -63,7 +64,8 @@ library.add(
   faFolderTree,
   faFolderOpen,
   faClock,
-  faStar
+  faStar,
+  faFlask
 )
 
 export { FontAwesomeIcon } 
