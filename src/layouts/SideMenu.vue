@@ -10,11 +10,13 @@
         />
       </div>
       <div 
-        class="flex-1 flex items-center px-2 transition-all duration-300"
+        class="flex items-center px-2 transition-all duration-300 overflow-hidden"
         :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
       >
-        <span class="text-sm font-medium text-base-content whitespace-nowrap transition-opacity duration-300"
-              :class="{ 'opacity-0': isCollapsed }">
+        <span 
+          class="text-sm font-medium text-base-content whitespace-nowrap transition-opacity duration-300"
+          :class="{ 'opacity-0': isCollapsed }"
+        >
           XuanBing Center
         </span>
       </div>
@@ -66,19 +68,18 @@
         class="bg-base-100 relative overflow-hidden transition-all duration-300"
         :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
       >
-        <ul class="menu menu-sm p-0"
-            :class="[isCollapsed ? 'w-[32px]' : 'w-[150px]']"
-        >
+        <ul class="menu menu-sm p-0">
           <template v-if="currentModuleRoute?.children">
             <li v-for="route in currentModuleRoute.children" 
                 :key="route.path"
-                class="my-1 px-3"
+                class="my-1"
+                :class="[isCollapsed ? 'px-1' : 'px-3']"
             >
               <a 
                 class="menu-item"
                 :class="[
                   { 'active': activeRoute === route.path },
-                  { 'justify-center': isCollapsed }
+                  isCollapsed ? 'w-[24px] h-[24px] justify-center' : 'w-full'
                 ]"
                 @click="handleSelect(route.path)"
               >
@@ -89,13 +90,17 @@
                 />
                 <span 
                   v-if="!isCollapsed"
-                  class="ml-2"
+                  class="ml-2 whitespace-nowrap"
                 >
                   {{ route.meta?.title }}
                 </span>
+                <font-awesome-icon
+                  v-if="!isCollapsed && route.children?.length"
+                  :icon="['fas', 'chevron-right']"
+                  class="ml-auto text-xs"
+                />
               </a>
 
-              <!-- 递归渲染子菜单 -->
               <template v-if="route.children && !isCollapsed">
                 <ul class="menu menu-sm pl-4">
                   <li v-for="child in route.children" 
@@ -112,7 +117,7 @@
                         :icon="['fas', child.meta.icon]"
                         class="text-sm"
                       />
-                      <span class="ml-2">{{ child.meta?.title }}</span>
+                      <span class="ml-2 whitespace-nowrap">{{ child.meta?.title }}</span>
                     </a>
                   </li>
                 </ul>
@@ -136,7 +141,7 @@
             <font-awesome-icon
               icon="angle-right"
               class="text-xs text-base-content/60 group-hover:text-primary
-                     transition-all duration-300"
+                     transition-transform duration-300 ease-in-out"
               :class="{ 'rotate-180': isCollapsed }"
             />
           </div>
@@ -171,35 +176,40 @@ onMounted(() => {
 
 <style scoped lang="postcss">
 .menu-item {
-  @apply flex items-center h-[36px] px-3
+  @apply flex items-center px-3
          hover:bg-base-200/50
          text-base-content/70 hover:text-base-content
-         relative
-         transition-[background-color] duration-200;
+         relative rounded-lg
+         transition-all duration-300;
+
+  /* 展开状态下的高度 */
+  height: 32px;
+  min-height: 32px;
 }
 
-.menu-item * {
-  @apply transition-none;
+/* 折叠时的菜单项样式 */
+.menu-item.w-\[24px\] {
+  @apply p-0;
+  height: 24px;
+  min-height: 24px;
 }
 
+/* 激活状态样式 */
 .menu-item.active {
   @apply !bg-primary !text-primary-content;
-}
-
-.menu-item.active,
-.menu-item.active * {
-  @apply !text-primary-content;
 }
 
 .menu-item.active:hover {
   @apply !bg-primary/90;
 }
 
-.menu-item.active:before {
-  @apply hidden;
+/* 菜单项内容的过渡效果 */
+.menu-item > * {
+  @apply transition-all duration-300;
 }
 
-.menu-item.active.justify-center:before {
-  @apply w-0;
+/* 图标过渡效果 */
+.menu-item .fa-chevron-right {
+  @apply transition-transform duration-300;
 }
 </style>
