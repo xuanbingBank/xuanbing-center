@@ -180,7 +180,9 @@ onMounted(() => {
          hover:bg-base-200/50
          text-base-content/70 hover:text-base-content
          relative rounded-lg
-         transition-all duration-300;
+         transition-[background-color,color]
+         duration-300
+         border border-transparent;
 
   /* 展开状态下的高度 */
   height: 32px;
@@ -201,11 +203,6 @@ onMounted(() => {
 
 .menu-item.active:hover {
   @apply !bg-primary/90;
-}
-
-/* 菜单项内容的过渡效果 */
-.menu-item > * {
-  @apply transition-all duration-300;
 }
 
 /* 图标过渡效果 */
