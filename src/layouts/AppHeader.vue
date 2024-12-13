@@ -9,26 +9,33 @@
       <div class="flex items-center [&]:webkit-app-region-no-drag webkit-app-region-no-drag">
         <!-- Minimize -->
         <button 
-          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
+          class="btn btn-sm hover:bg-base-200"
           @click="minimizeWindow"
         >
-          <font-awesome-icon icon="window-minimize" class="translate-y-[-5px]" />
+          <Icon 
+            icon="material-symbols:minimize" 
+            class="w-[16px] h-[16px]"
+          />
         </button>
 
         <!-- Maximize -->
         <button 
-          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-base-200 flex items-center justify-center"
+          class="btn btn-sm hover:bg-base-200"
           @click="toggleMaximize"
         >
-          <font-awesome-icon icon="window-maximize" />
+          <Icon 
+            icon="material-symbols:fullscreen" 
+          />
         </button>
 
         <!-- Close -->
         <button 
-          class="btn btn-ghost btn-sm h-[32px] w-[32px] min-h-0 rounded-none hover:bg-error flex items-center justify-center"
+          class="btn btn-sm hover:bg-error"
           @click="closeWindow"
         >
-          <font-awesome-icon icon="xmark" />
+          <Icon 
+            icon="material-symbols:close" 
+          />
         </button>
       </div>
     </div>
@@ -36,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { FontAwesomeIcon } from '@/utils/fontawesome'
+import { Icon } from '@iconify/vue'
 
 declare global {
   interface Window {
@@ -47,6 +54,8 @@ declare global {
     }
   }
 }
+
+let isMaximized = false;
 
 /**
  * @description 最小化窗口
@@ -60,6 +69,7 @@ const minimizeWindow = () => {
  */
 const toggleMaximize = () => {
   window.electronAPI.toggleMaximize()
+  isMaximized = !isMaximized
 }
 
 /**

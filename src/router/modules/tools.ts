@@ -5,7 +5,7 @@ export const toolsRoute: RouteRecordRaw = {
   name: 'tools',
   meta: {
     title: '工具',
-    icon: 'wrench',
+    icon: 'material-symbols:auto-awesome-mosaic',
     module: 'tools'
   },
   children: [
@@ -15,7 +15,7 @@ export const toolsRoute: RouteRecordRaw = {
       component: () => import('@/views/tools/features/index.vue'),
       meta: {
         title: '小功能组',
-        icon: 'wrench'
+        icon: 'material-symbols:widgets'
       }
     }
   ]

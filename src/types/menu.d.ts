@@ -9,7 +9,7 @@ export interface RouteMeta extends Partial<VueRouteMeta> {
   title?: string
   
   /** 图标 */
-  icon?: Component | string
+  icon?: string
   
   /** 所属模块 */
   module?: string

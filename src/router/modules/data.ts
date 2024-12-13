@@ -6,7 +6,7 @@ export const dataRoute: RouteRecordRaw = {
   name: 'data',
   meta: {
     title: '数据中心',
-    icon: 'folder',
+    icon: 'material-symbols:folder-data',
     module: 'data'
   },
   children: [
@@ -16,7 +16,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/notes/index.vue'),
       meta: {
         title: '笔记',
-        icon: 'file'
+        icon: 'material-symbols:note'
       }
     },
     {
@@ -25,7 +25,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/materials/index.vue'),
       meta: {
         title: '素材库',
-        icon: 'box-archive'
+        icon: 'material-symbols:unarchive'
       }
     },
     {
@@ -34,7 +34,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/bookmarks/index.vue'),
       meta: {
         title: '网址收藏',
-        icon: 'link'
+        icon: 'material-symbols:bookmark'
       }
     },
     {
@@ -43,7 +43,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/music/index.vue'),
       meta: {
         title: '音乐库',
-        icon: 'headphones'
+        icon: 'material-symbols:headphones'
       }
     },
     {
@@ -52,7 +52,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/videos/index.vue'),
       meta: {
         title: '视频库',
-        icon: 'video'
+        icon: 'material-symbols:video-library'
       }
     },
     {
@@ -61,7 +61,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/codes/index.vue'),
       meta: {
         title: '代码库',
-        icon: 'code'
+        icon: 'material-symbols:code'
       }
     },
     {
@@ -70,7 +70,7 @@ export const dataRoute: RouteRecordRaw = {
       component: () => import('@/views/data/others/index.vue'),
       meta: {
         title: '其他',
-        icon: 'folder'
+        icon: 'material-symbols:folder'
       }
     }
   ]

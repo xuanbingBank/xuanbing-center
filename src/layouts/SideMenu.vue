@@ -31,14 +31,14 @@
           <ul class="menu menu-sm bg-base-100 p-0 w-[31px]">
             <li v-for="route in topMenus" :key="route.name" class="my-1 w-full px-1">
               <a
-                class="w-[24px] h-[24px] flex items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                class="w-[24px] h-[24px] items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
                 :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
-                <font-awesome-icon
+                <Icon
                   v-if="route.meta?.icon"
-                  :icon="['fas', route.meta.icon]"
-                  class="text-sm"
+                  :icon="route.meta.icon"
+                  class="w-4 h-4"
                 />
               </a>
             </li>
@@ -48,14 +48,14 @@
           <ul class="menu menu-sm bg-base-100 p-0 w-[31px]">
             <li v-for="route in bottomMenus" :key="route.name" class="w-full px-1">
               <a
-                class="w-[24px] h-[24px] flex items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
+                class="w-[24px] h-[24px] items-center justify-center rounded-lg text-base-content/70 hover:text-base-content hover:bg-base-200 transition-[background-color] duration-200"
                 :class="{ 'active !bg-primary !text-primary-content': activeModule === route.meta?.module }"
                 @click="handleModuleSelect(route.meta?.module || '')"
               >
-                <font-awesome-icon
+                <Icon
                   v-if="route.meta?.icon"
-                  :icon="['fas', route.meta.icon]"
-                  class="text-sm"
+                  :icon="route.meta.icon"
+                  class="w-4 h-4"
                 />
               </a>
             </li>
@@ -83,20 +83,20 @@
                 ]"
                 @click="handleSelect(route.path)"
               >
-                <font-awesome-icon
+                <Icon
                   v-if="route.meta?.icon"
-                  :icon="['fas', route.meta.icon]"
-                  class="text-sm"
+                  :icon="route.meta.icon"
+                  class="w-4 h-4"
                 />
                 <span 
                   v-if="!isCollapsed"
-                  class="ml-2 whitespace-nowrap"
+                  class="ml-1 whitespace-nowrap"
                 >
                   {{ route.meta?.title }}
                 </span>
-                <font-awesome-icon
+                <Icon
                   v-if="!isCollapsed && route.children?.length"
-                  :icon="['fas', 'chevron-right']"
+                  icon="material-symbols:chevron-right"
                   class="ml-auto text-xs"
                 />
               </a>
@@ -112,12 +112,12 @@
                       :class="{ 'active': activeRoute === child.path }"
                       @click="handleSelect(child.path)"
                     >
-                      <font-awesome-icon
+                      <Icon
                         v-if="child.meta?.icon"
-                        :icon="['fas', child.meta.icon]"
-                        class="text-sm"
+                        :icon="child.meta.icon"
+                        class="w-4 h-4"
                       />
-                      <span class="ml-2 whitespace-nowrap">{{ child.meta?.title }}</span>
+                      <span class="ml-1 whitespace-nowrap">{{ child.meta?.title }}</span>
                     </a>
                   </li>
                 </ul>
@@ -138,11 +138,13 @@
                    border border-r-0 border-base-content/10 group-hover:border-primary
                    rounded-l transition-colors flex items-center justify-center"
           >
-            <font-awesome-icon
-              icon="angle-right"
+            <Icon
+              icon="material-symbols:chevron-right"
               class="text-xs text-base-content/60 group-hover:text-primary
                      transition-transform duration-300 ease-in-out"
               :class="{ 'rotate-180': isCollapsed }"
+              :width="14"
+              :height="14"
             />
           </div>
         </div>
@@ -153,7 +155,7 @@
 
 <script lang="ts" setup>
 import { onMounted } from 'vue'
-import { FontAwesomeIcon } from '@/utils/fontawesome'
+import { Icon } from '@iconify/vue'
 import { useMenu } from '@/hooks/useMenu'
 
 const {

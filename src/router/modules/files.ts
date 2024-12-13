@@ -5,7 +5,7 @@ export const filesRoute: RouteRecordRaw = {
   name: 'files',
   meta: {
     title: '文件管理',
-    icon: 'folder-tree',
+    icon: 'material-symbols:folder-managed',
     module: 'files'
   },
   children: [
@@ -15,7 +15,7 @@ export const filesRoute: RouteRecordRaw = {
       component: () => import('@/views/files/explorer/index.vue'),
       meta: {
         title: '文件浏览',
-        icon: 'folder-open'
+        icon: 'material-symbols:folder-open'
       }
     },
     {
@@ -24,7 +24,7 @@ export const filesRoute: RouteRecordRaw = {
       component: () => import('@/views/files/recent/index.vue'),
       meta: {
         title: '最近文件',
-        icon: 'clock'
+        icon: 'material-symbols:history'
       }
     },
     {
@@ -33,7 +33,7 @@ export const filesRoute: RouteRecordRaw = {
       component: () => import('@/views/files/favorites/index.vue'),
       meta: {
         title: '收藏夹',
-        icon: 'star'
+        icon: 'material-symbols:star'
       }
     }
   ]
